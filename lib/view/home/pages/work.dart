@@ -10,7 +10,9 @@ import 'package:aparna_chatterjee/view/utils/responsive.dart';
 import 'package:aparna_chatterjee/view/utils/responsive.dart';
 import 'package:aparna_chatterjee/view/utils/responsive.dart';
 import 'package:aparna_chatterjee/view/utils/textstyle.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
@@ -33,83 +35,84 @@ class _WorkState extends State<Work> with SingleTickerProviderStateMixin {
   }
 
   Widget _intros() {
-    return Padding(
-      padding: const EdgeInsets.only(right: 100),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              ResponsiveRowColumnItem(
-
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 12),
-                  child: MouseRegion(
-                    onHover: (event) {
-                      controller.forward();
-                      controller.addStatusListener((status) {
-                        if (status == AnimationStatus.completed) {
-                          controller.reverse();
-                        }
-                      });
-                    },
-                    onExit: (event) {
-                      controller.stop(canceled: true);
-                    },
-                    child: AnimatedEmoji(
-                      AnimatedEmojis.wave,
-                      size: 60,
-                      controller: controller,
-                      onLoaded: (duration) {
-                        controller.duration = duration;
-                      },
-                    ),
-                  ),
+    return Column(
+      children: [
+        Row(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 12),
+              child: MouseRegion(
+                onHover: (event) {
+                  controller.forward();
+                  controller.addStatusListener((status) {
+                    if (status == AnimationStatus.completed) {
+                      controller.reverse();
+                    }
+                  });
+                },
+                onExit: (event) {
+                  controller.stop(canceled: true);
+                },
+                child: AnimatedEmoji(
+                  AnimatedEmojis.wave,
+                  size: Responsive.isLargeMobile(context)
+                      ? 34
+                      : Responsive.isTablet(context)
+                          ? 48
+                          : 60,
+                  controller: controller,
+                  onLoaded: (duration) {
+                    controller.duration = duration;
+                  },
                 ),
               ),
-              const SizedBox(
-                width: 8,
-              ),
-              RichText(
-                text: TextSpan(
-                  text: 'Hello, I\'m  ',
-                  style: MyTxtStyles.local_headingStyle(context).copyWith(
-                    color: MyColors.secondaryTxtColor,
-                    fontWeight: FontWeight.w700,
-                  ),
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: 'Aparna Chatterjee.',
-                      style: MyTxtStyles.local_headingStyle(context)
-                          .copyWith(
-                            color: MyColors.secondaryTxtColor,
-                            fontWeight: FontWeight.w700,
-                          )
-                          .underlined(
-                              distance: 4, style: TextDecorationStyle.dashed),
-                    ),
-                  ],
+            ),
+            const SizedBox(
+              width: 8,
+            ),
+            RichText(
+              text: TextSpan(
+                text: 'Hello, I\'m  ',
+                style: MyTxtStyles.local_headingStyle(context).copyWith(
+                  color: MyColors.secondaryTxtColor,
+                  fontWeight: FontWeight.w700,
                 ),
+                children: <TextSpan>[
+                  TextSpan(
+                    text: 'Aparna Chatterjee.',
+                    style: MyTxtStyles.local_headingStyle(context)
+                        .copyWith(
+                          color: MyColors.secondaryTxtColor,
+                          fontWeight: FontWeight.w700,
+                        )
+                        .underlined(
+                            distance: 4, style: TextDecorationStyle.dashed),
+                  ),
+                ],
               ),
-            ],
-          ),
-          const SizedBox(
-            height: Dimens.defaultPadding,
-          ),
-          Text(
-            Strings.intro_prof,
-            style: MyTxtStyles.local_headingStyle(context)
-                .copyWith(color: MyColors.highlightTxtColor),
-          ),
-          const SizedBox(
-            height: Dimens.defaultPadding,
-          ),
-          Text(
-            Strings.intro_loc,
-            style: MyTxtStyles.local_primaryTextStyle(context)
-                .copyWith(color: MyColors.secondaryTxtColor),
-          ),
-        ],
-      ),
+            ),
+          ],
+        ),
+        const SizedBox(
+          height: Dimens.defaultPadding,
+        ),
+        Text(
+          Strings.intro_prof,
+          style: MyTxtStyles.local_headingStyle(context)
+              .copyWith(color: MyColors.highlightTxtColor),
+        ),
+        const SizedBox(
+          height: Dimens.defaultPadding,
+        ),
+        Text(
+          Strings.intro_loc,
+          style: MyTxtStyles.local_primaryTextStyle(context)
+              .copyWith(color: MyColors.secondaryTxtColor),
+        ),
+      ],
     );
   }
 
@@ -225,7 +228,7 @@ class _WorkState extends State<Work> with SingleTickerProviderStateMixin {
                       right: 6,
                       top: 8,
                       child: Container(
-                          constraints: BoxConstraints.tight(Size(80, 32)),
+                          constraints: BoxConstraints.tight(const Size(80, 32)),
                           child: SizedBox(child: logoImg)),
                     ),
                   ],
@@ -351,19 +354,36 @@ class _WorkState extends State<Work> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    double rightPadding =
+        Dimens.defaultRightPaddingRatio * MediaQuery.of(context).size.width;
+    double margin = Responsive.isLargeMobile(context)
+        ? 20
+        : Responsive.isTablet(context)
+            ? 40
+            : 100;
     return SingleChildScrollView(
-        child: Column(
+        child: ResponsiveRowColumn(
+      layout: ResponsiveRowColumnType.COLUMN,
       children: [
-        const SizedBox(
-          height: 100,
+        ResponsiveRowColumnItem(
+          child: SizedBox(
+            height: margin,
+          ),
         ),
-        _intros(),
-        const SizedBox(
-          height: 200,
+        ResponsiveRowColumnItem(
+            child: Padding(
+                padding: EdgeInsets.only(right: rightPadding),
+                child: _intros())),
+        ResponsiveRowColumnItem(
+          child: SizedBox(
+            height: margin * 2,
+          ),
         ),
-        _workpage(),
-        const SizedBox(
-          height: 100,
+        ResponsiveRowColumnItem(child: _workpage()),
+        ResponsiveRowColumnItem(
+          child: SizedBox(
+            height: margin,
+          ),
         ),
       ],
     ));

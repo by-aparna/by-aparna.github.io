@@ -16,6 +16,29 @@ class MyTxtStyles {
   static final TextStyle buttonTextStyle =
       GoogleFonts.poppins().copyWith(fontSize: 15, fontWeight: FontWeight.w400);
 
+  static final TextStyle _desktop_headingTextStyle = GoogleFonts.poppins()
+      .copyWith(fontSize: 22, height: 1.2, fontWeight: FontWeight.w600);
+
+  static final TextStyle _desktop_primaryTextStyle = GoogleFonts.poppins()
+      .copyWith(fontSize: 18, height: 1.3, fontWeight: FontWeight.w400);
+
+  static final TextStyle _desktop_bodyTextStyle =
+      GoogleFonts.poppins().copyWith(fontSize: 20, fontWeight: FontWeight.w400);
+
+  static final TextStyle _desktop_buttonTextStyle =
+      GoogleFonts.poppins().copyWith(fontSize: 18, fontWeight: FontWeight.w400);
+
+  static final TextStyle _large_headingTextStyle = GoogleFonts.poppins()
+      .copyWith(fontSize: 20, height: 1.2, fontWeight: FontWeight.w600);
+
+  static final TextStyle _large_primaryTextStyle = GoogleFonts.poppins()
+      .copyWith(fontSize: 16, height: 1.3, fontWeight: FontWeight.w400);
+
+  static final TextStyle _large_bodyTextStyle =
+      GoogleFonts.poppins().copyWith(fontSize: 18, fontWeight: FontWeight.w400);
+
+  static final TextStyle _large_buttonTextStyle =
+      GoogleFonts.poppins().copyWith(fontSize: 16, fontWeight: FontWeight.w400);
 
   static final TextStyle _mobile_headingTextStyle = GoogleFonts.poppins()
       .copyWith(fontSize: 16, height: 1.2, fontWeight: FontWeight.w600);
@@ -29,8 +52,37 @@ class MyTxtStyles {
   static final TextStyle _mobile_buttonTextStyle =
       GoogleFonts.poppins().copyWith(fontSize: 13, fontWeight: FontWeight.w400);
 
-  static TextStyle local_headingStyle(context) => Responsive.isMobile(context) ?  MyTxtStyles._mobile_headingTextStyle : MyTxtStyles._headingTextStyle;
-  static TextStyle local_primaryTextStyle(context) => Responsive.isMobile(context) ?  MyTxtStyles._mobile_primaryTextStyle : MyTxtStyles._primaryTextStyle;
-  static TextStyle local_bodyTextStyle(context) => Responsive.isMobile(context) ?  MyTxtStyles._mobile_bodyTextStyle : MyTxtStyles._bodyTextStyle;
-  static TextStyle local_buttonTextStyle(context) => Responsive.isMobile(context) ?  MyTxtStyles._mobile_buttonTextStyle : MyTxtStyles.buttonTextStyle;
+  static TextStyle local_headingStyle(context) => Responsive.isMobile(context)
+      ? MyTxtStyles._mobile_headingTextStyle
+      : Responsive.isLargeMobile(context)
+          ? MyTxtStyles._large_headingTextStyle
+          : Responsive.isTablet(context)
+              ? MyTxtStyles._desktop_headingTextStyle
+              : MyTxtStyles._headingTextStyle;
+
+  static TextStyle local_primaryTextStyle(context) =>
+      Responsive.isMobile(context)
+          ? MyTxtStyles._mobile_primaryTextStyle
+          : Responsive.isLargeMobile(context)
+              ? MyTxtStyles._large_primaryTextStyle
+              : Responsive.isTablet(context)
+                  ? MyTxtStyles._desktop_primaryTextStyle
+                  : MyTxtStyles._primaryTextStyle;
+
+  static TextStyle local_bodyTextStyle(context) => Responsive.isMobile(context)
+      ? MyTxtStyles._mobile_bodyTextStyle
+      : Responsive.isLargeMobile(context)
+          ? MyTxtStyles._large_bodyTextStyle
+          : Responsive.isTablet(context)
+              ? MyTxtStyles._desktop_bodyTextStyle
+              : MyTxtStyles._bodyTextStyle;
+
+  static TextStyle local_buttonTextStyle(context) =>
+      Responsive.isMobile(context)
+          ? MyTxtStyles._mobile_buttonTextStyle
+          : Responsive.isLargeMobile(context)
+              ? MyTxtStyles._large_buttonTextStyle
+              : Responsive.isTablet(context)
+                  ? MyTxtStyles._desktop_buttonTextStyle
+                  : MyTxtStyles.buttonTextStyle;
 }
