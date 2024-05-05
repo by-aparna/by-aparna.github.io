@@ -138,7 +138,7 @@ class _HomePageState extends State<HomePage> {
                     pageIndex = page;
                   });
                 },
-                children: [const Work(), Resume(), const Illustrations()],
+                children: [const Work(), About(), const Illustrations()],
               ),
             ),
           ],

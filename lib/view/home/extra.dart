@@ -310,3 +310,125 @@
 //     ],
 //   );
 // }
+
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:responsive_framework/responsive_framework.dart';
+
+import '../../res/path.dart';
+import '../utils/responsive.dart';
+
+class MyHomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Responsive Layout Example'),
+      ),
+      body: Center(
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            // If the width is less than 480, use a column layout
+            final isMobile = constraints.maxWidth < 600;
+            return Container(
+              margin: EdgeInsets.symmetric(horizontal: 10),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.black,
+                ),
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(14),
+                ),
+              ),
+              height: 500, // Minimum height
+              child: isMobile
+                  ? _buildColumnLayout() // Column layout for small screens
+                  : _buildRowLayout(), // Row layout for larger screens
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget _buildRowLayout() {
+    return Row(
+      children: [
+        Expanded(
+          flex: 4, // 40% width
+          child: Center(
+            child: Text(
+              'Section 1 - Text Row',
+              style: TextStyle(fontSize: 18),
+            ),
+          ),
+        ),
+        Expanded(
+          flex: 6, // 60% width
+          child: _buildImageSection(),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildColumnLayout() {
+    return Column(
+      children: [
+        Expanded(
+          flex: 1, // Adjust flex for proper scaling
+          child: Center(
+            child: Text(
+              'Section 1 - Text Column',
+              style: TextStyle(fontSize: 18),
+            ),
+          ),
+        ),
+        Expanded(
+          flex: 1, // Adjust flex for proper scaling
+          child: _buildImageSection(),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildImageSection() {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(16),
+      // Ensure the images are clipped to rounded corners
+      child: Stack(
+        children: [
+          Positioned.fill(
+            child: Image.asset(
+              '${FilePath.imgAssetPath}batch_swap.png',
+              // Replace with your asset
+              fit: BoxFit.cover, // Cover the entire space
+            ),
+          ),
+          Positioned(
+            right: -30,
+            top: -30,
+            child: Container(
+              width: 237, // Ellipse width
+              height: 110, // Ellipse height
+              decoration: BoxDecoration(
+                color: Colors.red, // Background color
+                shape: BoxShape.rectangle,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(16), // Top left radius
+                  topRight: Radius.circular(55), // Top right radius
+                  bottomLeft: Radius.circular(550), // Bottom left radius
+                  bottomRight: Radius.circular(150), // Bottom right radius
+                ),
+              ),
+              child: SvgPicture.asset(
+                '${FilePath.imgAssetPath}dzap.svg',
+                width: 78,
+                height: 22,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

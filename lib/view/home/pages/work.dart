@@ -135,109 +135,113 @@ class _WorkState extends State<Work> with SingleTickerProviderStateMixin {
           Radius.circular(14),
         ),
       ),
-      constraints: const BoxConstraints(
-        minHeight: 500,
-      ),
+      height: 500,
       width: width * .76,
-      child: Row(
-        mainAxisSize: MainAxisSize.max,
+      child: ResponsiveRowColumn(
+        layout: Responsive.isLargeMobile(context)
+            ? ResponsiveRowColumnType.COLUMN
+            : ResponsiveRowColumnType.ROW,
         children: [
-          Expanded(
-            flex: 10,
-            child: Container(
-              color: descriptionBgColor,
-              padding: const EdgeInsets.only(
-                left: 32,
-                right: 24,
-                top: 156,
-                bottom: 156,
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: MyTxtStyles.local_headingStyle(context)
-                        .copyWith(color: MyColors.highlightTxtColor),
+          ResponsiveRowColumnItem(
+            rowOrder: 1,
+            columnOrder: 2,
+            child: Expanded(
+              flex: 10,
+              child: Container(
+                color: descriptionBgColor,
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          title,
+                          style: MyTxtStyles.local_headingStyle(context)
+                              .copyWith(color: MyColors.highlightTxtColor),
+                        ),
+                        const SizedBox(
+                          height: Dimens.defaultPadding,
+                        ),
+                        Text(
+                          description,
+                          style: MyTxtStyles.local_primaryTextStyle(context)
+                              .copyWith(color: MyColors.secondaryTxtColor),
+                        ),
+                        const SizedBox(
+                          height: Dimens.defaultPadding,
+                        ),
+                        Wrap(
+                          clipBehavior: Clip.hardEdge,
+                          spacing: 8,
+                          runSpacing: 8,
+                          children: tagList.map((tag) {
+                            return tag;
+                          }).toList(),
+                        )
+                      ],
+                    ),
                   ),
-                  const SizedBox(
-                    height: Dimens.defaultPadding,
-                  ),
-                  Text(
-                    description,
-                    style: MyTxtStyles.local_primaryTextStyle(context)
-                        .copyWith(color: MyColors.secondaryTxtColor),
-                  ),
-                  const SizedBox(
-                    height: Dimens.defaultPadding,
-                  ),
-                  Wrap(
-                    clipBehavior: Clip.hardEdge,
-                    children: tagList.map((tag) {
-                      return Padding(
-                          padding: const EdgeInsets.only(
-                              right: Dimens.defaultPadding),
-                          child: tag);
-                    }).toList(),
-                  )
-                ],
+                ),
               ),
             ),
           ),
-          Expanded(
-            flex: 11,
-            child: Container(
-              decoration: BoxDecoration(
-                color: assetBgColor,
-                border: Border.all(
-                  color: cardBorderColor,
-                ),
-                borderRadius: const BorderRadius.only(
-                  topRight: Radius.circular(14),
-                  bottomRight: Radius.circular(14),
-                ),
-              ),
-              constraints: const BoxConstraints(
-                minHeight: 500,
-              ),
-              child: SizedBox(
-                width: 440,
-                height: 515,
-                child: Stack(
-                  children: [
-                    Positioned(
-                      top: 100,
-                      left: 100,
-                      child: image,
-                    ),
-                    Positioned(
-                      top: -48,
-                      right: -38,
-                      child: ClipPath(
-                        clipper: EllipseClipper(),
-                        child: Container(
-                          color: Colors.white,
-                          width: 137,
-                          height: 110,
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      right: 6,
-                      top: 8,
-                      child: Container(
-                          constraints: BoxConstraints.tight(const Size(80, 32)),
-                          child: SizedBox(child: logoImg)),
-                    ),
-                  ],
-                ),
-              ),
+          ResponsiveRowColumnItem(
+            rowOrder: 2,
+            columnOrder: 1,
+            child: Expanded(
+              flex: 11,
+              child:
+                  _buildImages(assetBgColor, cardBorderColor, image, logoImg),
             ),
           )
         ],
       ),
+    );
+  }
+
+  Widget _buildImages(assetBgColor, cardBorderColor, image, logoImg) {
+    Radius _16Radius = Radius.circular(16);
+    Radius _0Radius = Radius.circular(0);
+    return ClipRRect(
+      borderRadius: BorderRadius.only(
+        topLeft: Responsive.isLargeMobile(context) ? _16Radius : _0Radius,
+        topRight: _16Radius,
+        bottomLeft: _0Radius,
+        bottomRight: Responsive.isLargeMobile(context) ? _0Radius : _16Radius,
+      ),
+      child: Stack(children: [
+        Positioned.fill(
+          child: Container(
+            color: assetBgColor,
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: image,
+            ),
+          ),
+        ),
+        Positioned(
+          top: -48,
+          right: -38,
+          child: ClipPath(
+            clipper: EllipseClipper(),
+            child: Container(
+              color: Colors.white,
+              width: 137,
+              height: 110,
+            ),
+          ),
+        ),
+        Positioned(
+          right: 6,
+          top: 8,
+          child: Container(
+              constraints: BoxConstraints.tight(const Size(80, 32)),
+              child: logoImg),
+        ),
+      ]),
     );
   }
 
@@ -314,6 +318,7 @@ class _WorkState extends State<Work> with SingleTickerProviderStateMixin {
             assetBgColor: const Color(0xFF65CDA8),
             image: Image.asset(
               '${FilePath.imgAssetPath}batch_swap.png',
+              fit: BoxFit.contain,
             ),
             logoImg: SvgPicture.asset(
               '${FilePath.imgAssetPath}dzap.svg',
