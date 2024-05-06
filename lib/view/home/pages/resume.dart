@@ -2,7 +2,11 @@ import 'package:aparna_chatterjee/res/color.dart';
 import 'package:aparna_chatterjee/res/dimens.dart';
 import 'package:aparna_chatterjee/res/font_styles.dart';
 import 'package:aparna_chatterjee/res/path.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+
+import '../../utils/responsive.dart';
 
 class About extends StatelessWidget {
   const About({super.key});
@@ -10,30 +14,58 @@ class About extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(
-            height: 82,
-          ),
-          Text(
-            'Meet Aparna',
-            style: MyTxtStyles.local_headingStyle(context).copyWith(
-              color: MyColors.highlightTxtColor,
-            ),
-          ),
-          const SizedBox(
-            height: 28,
-          ),
-          Row(
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final isLargeMobile = Responsive.isLargeMobile(context);
+          return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(child: _buildDescription(context)),
-              Expanded(child: _buildImage(context))
+              const SizedBox(
+                height: 82,
+              ),
+              Text(
+                'Meet Aparna',
+                style: MyTxtStyles.local_headingStyle(context).copyWith(
+                  color: MyColors.highlightTxtColor,
+                ),
+              ),
+              const SizedBox(
+                height: 28,
+              ),
+              Container(
+                  child: isLargeMobile
+                      ? _mobileAboutMeLayout(context)
+                      : _desktopAboutMeLayout(context))
             ],
-          )
-        ],
+          );
+        },
       ),
+    );
+  }
+
+  Widget _mobileAboutMeLayout(context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Center(child: SizedBox(height: 300, child: _buildImage(context))),
+        const SizedBox(
+          height: 16,
+        ),
+        _buildDescription(context),
+      ],
+    );
+  }
+
+  Widget _desktopAboutMeLayout(context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(flex: 1, child: _buildDescription(context)),
+        const SizedBox(
+          width: 26,
+        ),
+        Expanded(flex: 1, child: _buildImage(context))
+      ],
     );
   }
 
