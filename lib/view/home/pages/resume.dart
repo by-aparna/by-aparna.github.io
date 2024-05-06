@@ -5,6 +5,7 @@ import 'package:aparna_chatterjee/res/path.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../utils/responsive.dart';
 
@@ -75,30 +76,51 @@ class About extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       mainAxisSize: MainAxisSize.max,
       children: [
-        _buildText(
-          context,
-          'I\'m a designer with deep <3 for the art of design. My journey began in architecture, where I learned to design physical spaces that blend beauty with functionality.',
+        Text.rich(
+          TextSpan(
+            text: 'I\'m a designer with deep ', // default style
+            style: MyTxtStyles.local_primaryTextStyle(context).copyWith(
+              color: MyColors.secondaryTxtColor,
+            ),
+            children: <TextSpan>[
+              TextSpan(
+                text: '❤️',
+                style: GoogleFonts.notoColorEmoji(),
+              ),
+              TextSpan(
+                text:
+                    ' for the art of design. My journey began in architecture, where I learned to design physical spaces that blend beauty with functionality.',
+                style: MyTxtStyles.local_primaryTextStyle(context).copyWith(
+                  color: MyColors.secondaryTxtColor,
+                ), // colored
+              ),
+              TextSpan(
+                text:
+                    '\n\nOver time, my curiosity led me to explore the digital landscape. Fascinated by its possibilities, I ventured into crafting engaging experiences in the digital space.',
+                style: MyTxtStyles.local_primaryTextStyle(context).copyWith(
+                  color: MyColors.secondaryTxtColor,
+                ), //
+              ),
+              TextSpan(
+                text:
+                    '\n\nI\'m a self-taught designer, having delved into UX/UI and product design through workshops, blogs, and hands-on projects.',
+                style: MyTxtStyles.local_primaryTextStyle(context).copyWith(
+                  color: MyColors.secondaryTxtColor,
+                ), //
+              ),
+            ],
+          ),
         ),
-        _buildSizedBox(context),
-        _buildText(
-          context,
-          'Over time, my curiosity led me to explore the digital landscape. Fascinated by its possibilities, I ventured into crafting engaging experiences in the digital space.',
+        const SizedBox(
+          height: 18,
         ),
-        _buildSizedBox(context),
-        _buildText(
-          context,
-          'I\'m a self-taught designer, having delved into UX/UI and product design through workshops, blogs, and hands-on projects.',
-        ),
+        ElevatedButton(
+            onPressed: () {},
+            child: Text(
+              'Resume',
+              style: MyTxtStyles.local_buttonTextStyle(context),
+            )),
       ],
-    );
-  }
-
-  Widget _buildText(BuildContext context, String text) {
-    return Text(
-      text,
-      style: MyTxtStyles.local_primaryTextStyle(context).copyWith(
-        color: MyColors.secondaryTxtColor,
-      ),
     );
   }
 

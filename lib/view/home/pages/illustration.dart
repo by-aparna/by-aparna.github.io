@@ -21,20 +21,16 @@ class Illustrations extends StatelessWidget {
             ),
           ),
           const SizedBox(height: Dimens.defaultPadding),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          Wrap(
+            alignment: WrapAlignment.spaceEvenly,
+            spacing: 24,
+            runSpacing: 16,
             children: [
-              SizedBox(
-                height: 677,
-                child: Image.asset(
-                  '${FilePath.imgAssetPath}illus1.png',
-                ),
+              Image.asset(
+                '${FilePath.imgAssetPath}illus1.png',
               ),
-              SizedBox(
-                height: 677,
-                child: Image.asset(
-                  '${FilePath.imgAssetPath}illus2.png',
-                ),
+              Image.asset(
+                '${FilePath.imgAssetPath}illus2.png',
               )
             ],
           ),

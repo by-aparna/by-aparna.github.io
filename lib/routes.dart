@@ -18,7 +18,7 @@ class Routes {
     init: (BuildContext context) => const SplashView(),
     home: (BuildContext context) => const HomePage(),
     work: (BuildContext context) => const HomePage(),
-    resume: (BuildContext context) => About(),
+    resume: (BuildContext context) => const About(),
     illustration: (BuildContext context) => const Illustrations(),
   };
 }
