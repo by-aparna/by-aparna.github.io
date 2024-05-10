@@ -33,7 +33,9 @@ class Illustrations extends StatelessWidget {
             )
           ],
         ),
-        const SizedBox(height: 24,),
+        const SizedBox(
+          height: 24,
+        ),
         const Divider(),
         const SizedBox(height: Dimens.defaultPadding),
         Align(

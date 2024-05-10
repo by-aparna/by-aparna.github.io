@@ -39,7 +39,6 @@ class _ExperienceCardState extends State<ExperienceCard>
     with TickerProviderStateMixin {
   late AnimationController _controller;
 
-
   @override
   void initState() {
     super.initState();
