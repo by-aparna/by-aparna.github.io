@@ -11,6 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
+import '../components/experience_card.dart';
+
 class Work extends StatefulWidget {
   const Work({super.key});
 
@@ -20,6 +22,7 @@ class Work extends StatefulWidget {
 
 class _WorkState extends State<Work> with SingleTickerProviderStateMixin {
   late final AnimationController controller;
+  int _isHovered = -1;
 
   @override
   void initState() {
@@ -138,124 +141,6 @@ class _WorkState extends State<Work> with SingleTickerProviderStateMixin {
     );
   }
 
-  Widget _experienceCard({
-    required String title,
-    required String description,
-    required List<Widget> tagList,
-    required Color descriptionBgColor,
-    required Color assetBgColor,
-    required Color cardBorderColor,
-    required Image image,
-    required SvgPicture logoImg,
-  }) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(color: cardBorderColor),
-        borderRadius: const BorderRadius.all(Radius.circular(14)),
-      ),
-      height: 500,
-      width: MediaQuery.of(context).size.width * 0.76,
-      child: ResponsiveRowColumn(
-        layout: Responsive.isLargeMobile(context)
-            ? ResponsiveRowColumnType.COLUMN
-            : ResponsiveRowColumnType.ROW,
-        children: [
-          ResponsiveRowColumnItem(
-            rowOrder: 1,
-            columnOrder: 2,
-            child: Expanded(
-              flex: 10,
-              child: Container(
-                color: descriptionBgColor,
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          title,
-                          style: MyTxtStyles.local_headingStyle(context)
-                              .copyWith(color: MyColors.highlightTxtColor),
-                        ),
-                        const SizedBox(height: Dimens.defaultPadding),
-                        Text(
-                          description,
-                          style: MyTxtStyles.local_primaryTextStyle(context)
-                              .copyWith(color: MyColors.secondaryTxtColor),
-                        ),
-                        const SizedBox(height: Dimens.defaultPadding),
-                        Wrap(
-                          clipBehavior: Clip.hardEdge,
-                          spacing: 8,
-                          runSpacing: 8,
-                          children: tagList,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          ResponsiveRowColumnItem(
-            rowOrder: 2,
-            columnOrder: 1,
-            child: Expanded(
-              flex: 11,
-              child: ClipRRect(
-                borderRadius: BorderRadius.only(
-                  topLeft: Responsive.isLargeMobile(context)
-                      ? Radius.circular(16)
-                      : Radius.circular(0),
-                  topRight: Radius.circular(16),
-                  bottomLeft: Radius.circular(0),
-                  bottomRight: Responsive.isLargeMobile(context)
-                      ? Radius.circular(0)
-                      : Radius.circular(16),
-                ),
-                child: Stack(
-                  children: [
-                    Positioned.fill(
-                      child: Container(
-                        color: assetBgColor,
-                        child: Align(
-                          alignment: Alignment.bottomCenter,
-                          child: image,
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      top: -48,
-                      right: -38,
-                      child: ClipPath(
-                        clipper: EllipseClipper(),
-                        child: Container(
-                          color: Colors.white,
-                          width: 137,
-                          height: 110,
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      right: 6,
-                      top: 8,
-                      child: Container(
-                        constraints: BoxConstraints.tight(const Size(80, 32)),
-                        child: logoImg,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget _workpage() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -266,59 +151,71 @@ class _WorkState extends State<Work> with SingleTickerProviderStateMixin {
               .copyWith(color: MyColors.secondaryTxtColor),
         ),
         const SizedBox(height: 16),
-        _experienceCard(
-          title: 'Batch Swap',
-          description:
-              'Batch swapping enables users to exchange multiple tokens in a single transaction.',
-          tagList: [
-            _tag(
-              title: 'Product Design',
-              titleColor: const Color(0xFF99C2FF),
-              borderColor: const Color(0xFF2966C2),
-              gradient: LinearGradient(colors: [
-                const Color(0xFF00407A).withOpacity(0.2),
-                const Color(0xFF56AAF7).withOpacity(0.2)
-              ]),
-            ),
-            _tag(
-              title: 'Brand Design',
-              titleColor: const Color(0xFFFFA279),
-              borderColor: const Color(0xFFC25729),
-              gradient: LinearGradient(colors: [
-                const Color(0xFF7A3300).withOpacity(0.2),
-                const Color(0xFFF79056).withOpacity(0.2)
-              ]),
-            ),
-          ],
-          cardBorderColor: const Color(0xFF424247),
-          descriptionBgColor: const Color(0xFF020309).withOpacity(0.1),
-          assetBgColor: const Color(0xFF65CDA8),
-          image: Image.asset('${FilePath.imgAssetPath}batch_swap.png',
-              fit: BoxFit.contain),
-          logoImg: SvgPicture.asset('${FilePath.imgAssetPath}dzap.svg',
-              width: 78, height: 22),
+        MouseRegion(
+          onHover: (_) => setState(() => _isHovered = 0),
+          onEnter: (_) => setState(() => _isHovered = 0),
+          onExit: (_) => setState(() => _isHovered = -1),
+          child: ExperienceCard(
+            isHovered: _isHovered == 0,
+            title: 'Batch Swap',
+            description:
+                'Batch swapping enables users to exchange multiple tokens in a single transaction.',
+            tagList: [
+              _tag(
+                title: 'Product Design',
+                titleColor: const Color(0xFF99C2FF),
+                borderColor: const Color(0xFF2966C2),
+                gradient: LinearGradient(colors: [
+                  const Color(0xFF00407A).withOpacity(0.2),
+                  const Color(0xFF56AAF7).withOpacity(0.2)
+                ]),
+              ),
+              _tag(
+                title: 'Brand Design',
+                titleColor: const Color(0xFFFFA279),
+                borderColor: const Color(0xFFC25729),
+                gradient: LinearGradient(colors: [
+                  const Color(0xFF7A3300).withOpacity(0.2),
+                  const Color(0xFFF79056).withOpacity(0.2)
+                ]),
+              ),
+            ],
+            cardBorderColor: const Color(0xFF424247),
+            descriptionBgColor: const Color(0xFF020309).withOpacity(0.1),
+            assetBgColor: const Color(0xFF65CDA8),
+            image: Image.asset('${FilePath.imgAssetPath}batch_swap.png',
+                fit: BoxFit.contain),
+            logoImg: SvgPicture.asset('${FilePath.imgAssetPath}dzap.svg',
+                width: 78, height: 22),
+          ),
         ),
         const SizedBox(height: 56),
-        _experienceCard(
-          title: 'Investor Dashboard, Staking',
-          description:
-              'A tool for investors to track their token allocations, vesting schedule & claimable tokens in all the funding rounds.',
-          tagList: [
-            _tag(
-              title: 'Product Re-Design',
-              titleColor: const Color(0xFF99FFA9),
-              borderColor: const Color(0xFF48C229),
-              gradient: LinearGradient(colors: [
-                const Color(0xFF207A00).withOpacity(0.2),
-                const Color(0xFF56F7EE).withOpacity(0.2)
-              ]),
-            ),
-          ],
-          cardBorderColor: const Color(0xFF424247),
-          descriptionBgColor: const Color(0xFF020309).withOpacity(0.1),
-          assetBgColor: const Color(0xFF9382FF),
-          image: Image.asset('${FilePath.imgAssetPath}staking.png'),
-          logoImg: SvgPicture.asset('${FilePath.imgAssetPath}propel.svg'),
+        MouseRegion(
+          onHover: (_) => setState(() => _isHovered = 1),
+          onEnter: (_) => setState(() => _isHovered = 1),
+          onExit: (_) => setState(() => _isHovered = -1),
+          child: ExperienceCard(
+            isHovered: _isHovered == 1,
+            title: 'Investor Dashboard, Staking',
+            description:
+                'A tool for investors to track their token allocations, vesting schedule & claimable tokens in all the funding rounds.',
+            tagList: [
+              _tag(
+                title: 'Product Re-Design',
+                titleColor: const Color(0xFF99FFA9),
+                borderColor: const Color(0xFF48C229),
+                gradient: LinearGradient(colors: [
+                  const Color(0xFF207A00).withOpacity(0.2),
+                  const Color(0xFF56F7EE).withOpacity(0.2)
+                ]),
+              ),
+            ],
+            cardBorderColor: const Color(0xFF424247),
+            descriptionBgColor: const Color(0xFF020309).withOpacity(0.1),
+            assetBgColor: const Color(0xFF9382FF),
+            image: Image.asset('${FilePath.imgAssetPath}staking.png'),
+            logoImg: SvgPicture.asset('${FilePath.imgAssetPath}propel.svg'),
+          ),
         ),
       ],
     );

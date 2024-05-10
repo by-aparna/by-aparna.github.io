@@ -9,161 +9,78 @@ import '../../res/strings.dart';
 import '../utils/responsive.dart';
 
 class LearnPage extends StatefulWidget {
+  final Widget child;
+
+  const LearnPage({Key? key, required this.child}) : super(key: key);
+
   @override
   State<LearnPage> createState() => _LearnPageState();
 }
 
 class _LearnPageState extends State<LearnPage> {
-  int _pageIndex = 0;
-  ScrollController _scrollController = ScrollController();
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
-  }
-
-  Widget _buildLeading() {
-    return PreferredSize(
-      preferredSize: const Size(100, 150), // Set the size of the leading item
-      child: Container(
-        // Add padding to create a flexible margin
-        padding: EdgeInsets.only(
-            left: Responsive.isLargeMobile(context)
-                ? 30
-                : Responsive.isTablet(context)
-                    ? 60
-                    : 150),
-        child: SvgPicture.asset(
-            '${FilePath.imgAssetPath}aparna_chatterjee_logo.svg'),
-      ),
-    );
-  }
+  bool isHovered = false;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: CustomScrollView(
-        controller: _scrollController,
-        slivers: <Widget>[
-          SliverAppBar(
-            toolbarHeight: 150,
-            backgroundColor: Colors.transparent,
-            flexibleSpace: FlexibleSpaceBar(
-              background: Container(
-                decoration: BoxDecoration(
-                  gradient: RadialGradient(
-                    center: Alignment.centerLeft,
-                    colors: [
-                      Colors.transparent,
-                      MyColors.homeBackground,
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            expandedHeight: 100,
-            floating: true,
-            pinned: true,
-            leading: _buildLeading(),
-            actions: [
-              _menu(
-                title: Strings.menu_work,
-                isSelected: _pageIndex == 0,
-                onClick: () => _selectPage(0),
-              ),
-              _menu(
-                title: Strings.menu_resume,
-                isSelected: _pageIndex == 1,
-                onClick: () => _selectPage(1),
-              ),
-              _menu(
-                title: Strings.menu_illus,
-                isSelected: _pageIndex == 2,
-                onClick: () => _selectPage(2),
+    return MouseRegion(
+      onEnter: (_) => setState(() => isHovered = true),
+      onExit: (_) => setState(() => isHovered = false),
+      child: GestureDetector(
+        onTap: () {}, // Add onTap behavior if needed
+        child: AnimatedContainer(
+          duration: Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+          decoration: BoxDecoration(
+            color: Colors.white.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(12),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                blurRadius: 16,
+                spreadRadius: 4,
               ),
             ],
+            border: isHovered
+                ? Border.all(
+                    color: Colors.white.withOpacity(0.1),
+                    width: 1,
+                  )
+                : null,
           ),
-          SliverToBoxAdapter(
-            child: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    MyColors.homeBackground.withOpacity(0.5),
-                    MyColors.homeBackground.withOpacity(0.0),
-                  ],
-                ),
-              ),
-              child: Column(
-                children: [
-                  // _headers(),
-                  SizedBox(
-                    height: 20,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: Stack(
+              children: [
+                widget.child,
+                Positioned.fill(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      gradient: isHovered
+                          ? LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                Color(0xFF00FFD1).withOpacity(0.3),
+                                Color(0xFF00FFD1).withOpacity(0),
+                              ],
+                            )
+                          : LinearGradient(
+                              begin: Alignment.bottomRight,
+                              end: Alignment.topLeft,
+                              colors: [
+                                Color(0xFF00FFD1).withOpacity(0.1),
+                                Color(0xFF00FFD1).withOpacity(0),
+                              ],
+                            ),
+                    ),
                   ),
-                  // _intros(width),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
-                return ListTile(
-                  title: Text('Item $index'),
-                );
-              },
-              childCount: 50,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _menu(
-      {required String title,
-      required bool isSelected,
-      required VoidCallback onClick}) {
-    return InkWell(
-      onTap: onClick,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-            horizontal: Dimens.menuPadding, vertical: Dimens.defaultPadding),
-        child: Column(
-          children: [
-            Text(
-              title,
-              style: MyTxtStyles.local_primaryTextStyle(context).copyWith(
-                color: isSelected
-                    ? MyColors.highlightTxtColor
-                    : MyColors.secondaryTxtColor,
-                fontWeight: isSelected ? FontWeight.w500 : FontWeight.w400,
-                height: 0,
-              ),
-            ),
-            Container(
-              width: 4,
-              height: 4,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: isSelected
-                    ? MyColors.highlightTxtColor
-                    : Colors.transparent,
-              ),
-            )
-          ],
         ),
       ),
     );
-  }
-
-  void _selectPage(int index) {
-    if (_pageIndex != index) {
-      setState(() {
-        _pageIndex = index;
-      });
-    }
   }
 }
