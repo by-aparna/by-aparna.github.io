@@ -4,12 +4,10 @@ import 'package:aparna_chatterjee/res/dimens.dart';
 import 'package:aparna_chatterjee/res/font_styles.dart';
 import 'package:aparna_chatterjee/res/path.dart';
 import 'package:aparna_chatterjee/res/strings.dart';
-import 'package:aparna_chatterjee/view/utils/paint.dart';
 import 'package:aparna_chatterjee/view/utils/responsive.dart';
 import 'package:aparna_chatterjee/view/utils/textstyle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 
 import '../components/experience_card.dart';
 
@@ -23,6 +21,7 @@ class Work extends StatefulWidget {
 class _WorkState extends State<Work> with SingleTickerProviderStateMixin {
   late final AnimationController controller;
   int _isHovered = -1;
+  bool _txtHovered = false;
 
   @override
   void initState() {
@@ -52,24 +51,35 @@ class _WorkState extends State<Work> with SingleTickerProviderStateMixin {
   }
 
   Widget _helloText() {
-    return RichText(
-      text: TextSpan(
-        text: 'Hello, I\'m  ',
-        style: MyTxtStyles.local_headingStyle(context).copyWith(
-          color: MyColors.secondaryTxtColor,
-          fontWeight: FontWeight.w700,
+    return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.start,
+      alignment: WrapAlignment.start,
+      children: [
+        Text(
+          'Hello, I\'m  ',
+          style: MyTxtStyles.local_headingStyle(context).copyWith(
+            color: MyColors.secondaryTxtColor,
+            fontWeight: FontWeight.w700,
+          ),
         ),
-        children: <TextSpan>[
-          TextSpan(
-            text: 'Aparna Chatterjee.',
+        MouseRegion(
+          onHover: (_) => setState(() => _txtHovered = true),
+          onExit: (_) => setState(() => _txtHovered = false),
+          child: Text(
+            'Aparna Chatterjee.',
             style: MyTxtStyles.local_headingStyle(context)
                 .copyWith(
                     color: MyColors.secondaryTxtColor,
                     fontWeight: FontWeight.w700)
-                .underlined(distance: 4, style: TextDecorationStyle.dashed),
+                .underlined(
+                    distance: 4,
+                    style: TextDecorationStyle.dashed,
+                    color: _txtHovered
+                        ? Color(0xFF9C5FFF)
+                        : MyColors.secondaryTxtColor),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
@@ -85,10 +95,12 @@ class _WorkState extends State<Work> with SingleTickerProviderStateMixin {
       },
       onExit: (event) => controller.stop(canceled: true),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Padding(

@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../utils/responsive.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -119,7 +121,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: MyColors.secondaryBackground,
+      backgroundColor: MyColors.homeBackground,
       body: Padding(
         padding: const EdgeInsets.only(top: 32),
         child: Column(
@@ -138,11 +140,16 @@ class _HomePageState extends State<HomePage> {
                 itemCount: 3,
                 itemBuilder: (context, index) {
                   return SingleChildScrollView(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: width * Dimens.defaultLeftPaddingRatio,
+                    child: Container(
+                      color: MyColors.homeBackground,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: Responsive.isMobile(context)
+                              ? (width * .06)
+                              : (width * Dimens.defaultLeftPaddingRatio),
+                        ),
+                        child: _buildPage(index),
                       ),
-                      child: _buildPage(index),
                     ),
                   );
                 },

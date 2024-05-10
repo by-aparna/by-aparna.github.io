@@ -1,12 +1,12 @@
 import 'dart:math';
 
 import 'package:aparna_chatterjee/res/color.dart';
-import 'package:aparna_chatterjee/res/dimens.dart';
 import 'package:aparna_chatterjee/res/font_styles.dart';
 import 'package:aparna_chatterjee/res/path.dart';
 import 'package:flutter/material.dart';
 
 import '../../utils/responsive.dart';
+import '../components/hoverbutton.dart';
 
 class About extends StatelessWidget {
   const About({super.key});
@@ -75,15 +75,18 @@ class About extends StatelessWidget {
       children: [
         Text.rich(
           TextSpan(
-            text: 'I\'m a designer with deep love', // default style
+            text: 'I\'m a designer with deep ', // default style
             style: MyTxtStyles.local_primaryTextStyle(context).copyWith(
               color: MyColors.secondaryTxtColor,
             ),
-            children: <TextSpan>[
-              // TextSpan(
-              //   text: '❤️',
-              //   style: GoogleFonts.notoColorEmoji(),
-              // ),
+            children: [
+              WidgetSpan(
+                child: Icon(
+                  Icons.favorite,
+                  color: Colors.red,
+                  size: MyTxtStyles.local_primaryFontSize(context),
+                ),
+              ),
               TextSpan(
                 text:
                     ' for the art of design. My journey began in architecture, where I learned to design physical spaces that blend beauty with functionality.',
@@ -109,14 +112,9 @@ class About extends StatelessWidget {
           ),
         ),
         const SizedBox(
-          height: 18,
+          height: 28,
         ),
-        ElevatedButton(
-            onPressed: () {},
-            child: Text(
-              'Resume',
-              style: MyTxtStyles.local_buttonTextStyle(context),
-            )),
+        const HoverCardButton(),
       ],
     );
   }

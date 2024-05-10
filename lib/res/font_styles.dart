@@ -46,8 +46,8 @@ class MyTxtStyles {
   static final TextStyle _mobile_primaryTextStyle = GoogleFonts.poppins()
       .copyWith(fontSize: 12, height: 2.2, fontWeight: FontWeight.w400);
 
-  static final TextStyle _mobile_bodyTextStyle =
-      GoogleFonts.poppins().copyWith(fontSize: 14, height: 22, fontWeight: FontWeight.w400);
+  static final TextStyle _mobile_bodyTextStyle = GoogleFonts.poppins()
+      .copyWith(fontSize: 14, height: 22, fontWeight: FontWeight.w400);
 
   static final TextStyle _mobile_buttonTextStyle =
       GoogleFonts.poppins().copyWith(fontSize: 13, fontWeight: FontWeight.w400);
@@ -68,6 +68,14 @@ class MyTxtStyles {
               : Responsive.isTablet(context)
                   ? MyTxtStyles._desktop_primaryTextStyle
                   : MyTxtStyles._primaryTextStyle;
+
+  static double local_primaryFontSize(context) => Responsive.isMobile(context)
+      ? 16
+      : Responsive.isLargeMobile(context)
+          ? 20
+          : Responsive.isTablet(context)
+              ? 22
+              : 28;
 
   static TextStyle local_bodyTextStyle(context) => Responsive.isMobile(context)
       ? MyTxtStyles._mobile_bodyTextStyle
