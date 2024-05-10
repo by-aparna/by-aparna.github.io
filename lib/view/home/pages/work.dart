@@ -36,19 +36,15 @@ class _WorkState extends State<Work> with SingleTickerProviderStateMixin {
   }
 
   Widget _animatedEmoji() {
-    return MouseRegion(
-      onHover: (event) => controller.forward(),
-      onExit: (event) => controller.stop(canceled: true),
-      child: AnimatedEmoji(
-        AnimatedEmojis.wave,
-        size: Responsive.isLargeMobile(context)
-            ? 34
-            : Responsive.isTablet(context)
-                ? 48
-                : 60,
-        controller: controller,
-        onLoaded: (duration) => controller.duration = duration,
-      ),
+    return AnimatedEmoji(
+      AnimatedEmojis.wave,
+      size: Responsive.isLargeMobile(context)
+          ? 34
+          : Responsive.isTablet(context)
+              ? 48
+              : 60,
+      controller: controller,
+      onLoaded: (duration) => controller.duration = duration,
     );
   }
 
@@ -75,34 +71,45 @@ class _WorkState extends State<Work> with SingleTickerProviderStateMixin {
   }
 
   Widget _intros() {
-    return Column(
-      children: [
-        Row(
-          mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 12),
-              child: _animatedEmoji(),
-            ),
-            const SizedBox(width: 8),
-            _helloText(),
-          ],
-        ),
-        const SizedBox(height: Dimens.defaultPadding),
-        Text(
-          Strings.intro_prof,
-          style: MyTxtStyles.local_headingStyle(context)
-              .copyWith(color: MyColors.highlightTxtColor),
-        ),
-        const SizedBox(height: Dimens.defaultPadding),
-        Text(
-          Strings.intro_loc,
-          style: MyTxtStyles.local_primaryTextStyle(context)
-              .copyWith(color: MyColors.secondaryTxtColor),
-        ),
-      ],
+    return MouseRegion(
+      onHover: (event) {
+        controller.forward();
+        controller.addStatusListener((status) {
+          if (status == AnimationStatus.completed) {
+            controller.reverse();
+          }
+        });
+      },
+      onExit: (event) => controller.stop(canceled: true),
+      child: Column(
+        children: [
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 12),
+                child: _animatedEmoji(),
+              ),
+              const SizedBox(width: 8),
+              _helloText(),
+            ],
+          ),
+          const SizedBox(height: Dimens.defaultPadding),
+          Text(
+            Strings.intro_prof,
+            style: MyTxtStyles.local_headingStyle(context)
+                .copyWith(color: MyColors.highlightTxtColor),
+          ),
+          const SizedBox(height: Dimens.defaultPadding),
+          Text(
+            Strings.intro_loc,
+            style: MyTxtStyles.local_primaryTextStyle(context)
+                .copyWith(color: MyColors.secondaryTxtColor),
+          ),
+        ],
+      ),
     );
   }
 

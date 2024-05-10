@@ -83,8 +83,9 @@ class _HomePageState extends State<HomePage> {
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: [
-          SvgPicture.asset('${FilePath.imgAssetPath}aparna_chatterjee_logo.svg'),
-          Spacer(),
+          SvgPicture.asset(
+              '${FilePath.imgAssetPath}aparna_chatterjee_logo.svg'),
+          const Spacer(),
           _menu(
             title: Strings.menu_work,
             isSelected: pageIndex == 0,
@@ -156,13 +157,13 @@ class _HomePageState extends State<HomePage> {
   Widget _buildPage(int index) {
     switch (index) {
       case 0:
-        return Work();
+        return const Work();
       case 1:
-        return About();
+        return const About();
       case 2:
-        return Illustrations();
+        return const Illustrations();
       default:
-        return SizedBox.shrink();
+        return const SizedBox.shrink();
     }
   }
 }
