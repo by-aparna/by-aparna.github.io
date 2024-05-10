@@ -1,11 +1,10 @@
+import 'dart:math';
+
 import 'package:aparna_chatterjee/res/color.dart';
 import 'package:aparna_chatterjee/res/dimens.dart';
 import 'package:aparna_chatterjee/res/font_styles.dart';
 import 'package:aparna_chatterjee/res/path.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../utils/responsive.dart';
 
@@ -14,33 +13,31 @@ class About extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          final isLargeMobile = Responsive.isLargeMobile(context);
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(
-                height: 82,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isLargeMobile = Responsive.isLargeMobile(context);
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(
+              height: 82,
+            ),
+            Text(
+              'Meet Aparna',
+              style: MyTxtStyles.local_headingStyle(context).copyWith(
+                color: MyColors.highlightTxtColor,
               ),
-              Text(
-                'Meet Aparna',
-                style: MyTxtStyles.local_headingStyle(context).copyWith(
-                  color: MyColors.highlightTxtColor,
-                ),
-              ),
-              const SizedBox(
-                height: 28,
-              ),
-              Container(
-                  child: isLargeMobile
-                      ? _mobileAboutMeLayout(context)
-                      : _desktopAboutMeLayout(context))
-            ],
-          );
-        },
-      ),
+            ),
+            const SizedBox(
+              height: 28,
+            ),
+            Container(
+                child: isLargeMobile
+                    ? _mobileAboutMeLayout(context)
+                    : _desktopAboutMeLayout(context))
+          ],
+        );
+      },
     );
   }
 
@@ -78,15 +75,15 @@ class About extends StatelessWidget {
       children: [
         Text.rich(
           TextSpan(
-            text: 'I\'m a designer with deep ', // default style
+            text: 'I\'m a designer with deep love', // default style
             style: MyTxtStyles.local_primaryTextStyle(context).copyWith(
               color: MyColors.secondaryTxtColor,
             ),
             children: <TextSpan>[
-              TextSpan(
-                text: '❤️',
-                style: GoogleFonts.notoColorEmoji(),
-              ),
+              // TextSpan(
+              //   text: '❤️',
+              //   style: GoogleFonts.notoColorEmoji(),
+              // ),
               TextSpan(
                 text:
                     ' for the art of design. My journey began in architecture, where I learned to design physical spaces that blend beauty with functionality.',
@@ -124,13 +121,13 @@ class About extends StatelessWidget {
     );
   }
 
-  Widget _buildSizedBox(BuildContext context) {
-    return const SizedBox(
-      height: Dimens.defaultPadding, // Can adjust based on screen size
-    );
-  }
-
   Widget _buildImage(context) {
-    return Image.asset('${FilePath.imgAssetPath}me.jpeg');
+    return SizedBox(
+      height: min(MediaQuery.of(context).size.width * .6, 900),
+      child: Image.asset(
+        '${FilePath.imgAssetPath}me.jpeg',
+        alignment: Alignment.topCenter,
+      ),
+    );
   }
 }

@@ -7,6 +7,7 @@ import 'package:aparna_chatterjee/view/home/pages/illustration.dart';
 import 'package:aparna_chatterjee/view/home/pages/resume.dart';
 import 'package:aparna_chatterjee/view/home/pages/work.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class HomePage extends StatefulWidget {
@@ -19,6 +20,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late final PageController controller;
   int pageIndex = 0;
+  static const Duration animationDuration = Duration(milliseconds: 200);
 
   @override
   void initState() {
@@ -26,12 +28,13 @@ class _HomePageState extends State<HomePage> {
     controller = PageController(initialPage: pageIndex);
   }
 
-  Widget _menu(
-      {required String title,
-      required bool isSelected,
-      required Function onClick}) {
+  Widget _menu({
+    required String title,
+    required bool isSelected,
+    required VoidCallback onClick,
+  }) {
     return GestureDetector(
-      onTap: () => onClick(),
+      onTap: onClick,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: Dimens.menuPadding),
         child: Column(
@@ -62,57 +65,53 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  _animatePage() {
-    controller.animateToPage(pageIndex,
-        duration: const Duration(milliseconds: 200), curve: Curves.ease);
+  void _animatePage(int page) {
+    controller.animateToPage(
+      page,
+      duration: animationDuration,
+      curve: Curves.ease,
+    );
   }
 
-  Widget _headers() {
+  Widget _headers(double width) {
     return Container(
-      padding: const EdgeInsets.only(bottom: 16),
+      padding: EdgeInsets.only(
+        bottom: 16,
+        left: width * Dimens.defaultLeftPaddingRatio,
+        right: width * Dimens.defaultRightPaddingRatio,
+      ),
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: [
-          SvgPicture.asset(
-              '${FilePath.imgAssetPath}aparna_chatterjee_logo.svg'),
-          const Spacer(),
+          SvgPicture.asset('${FilePath.imgAssetPath}aparna_chatterjee_logo.svg'),
+          Spacer(),
           _menu(
-              title: Strings.menu_work,
-              isSelected: pageIndex == 0,
-              onClick: () {
-                print('work click');
-                setState(() {
-                  if (pageIndex != 0) {
-                    pageIndex = 0;
-                    _animatePage();
-                  }
-                });
-              }),
+            title: Strings.menu_work,
+            isSelected: pageIndex == 0,
+            onClick: () => _handleMenuClick(0),
+          ),
           _menu(
-              title: Strings.menu_resume,
-              isSelected: pageIndex == 1,
-              onClick: () {
-                setState(() {
-                  if (pageIndex != 1) {
-                    pageIndex = 1;
-                    _animatePage();
-                  }
-                });
-              }),
+            title: Strings.menu_resume,
+            isSelected: pageIndex == 1,
+            onClick: () => _handleMenuClick(1),
+          ),
           _menu(
-              title: Strings.menu_illus,
-              isSelected: pageIndex == 2,
-              onClick: () {
-                setState(() {
-                  if (pageIndex != 2) {
-                    pageIndex = 2;
-                    _animatePage();
-                  }
-                });
-              }),
+            title: Strings.menu_illus,
+            isSelected: pageIndex == 2,
+            onClick: () => _handleMenuClick(2),
+          ),
         ],
       ),
     );
+  }
+
+  void _handleMenuClick(int index) {
+    if (pageIndex != index) {
+      setState(() {
+        pageIndex = index;
+        _animatePage(index);
+      });
+    }
   }
 
   @override
@@ -121,15 +120,12 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: MyColors.secondaryBackground,
       body: Padding(
-        padding: EdgeInsets.only(
-            left: width * Dimens.defaultLeftPaddingRatio,
-            right: width * Dimens.defaultRightPaddingRatio,
-            top: 32),
+        padding: const EdgeInsets.only(top: 32),
         child: Column(
           children: [
-            _headers(),
+            _headers(width),
             Expanded(
-              child: PageView(
+              child: PageView.builder(
                 scrollDirection: Axis.vertical,
                 physics: const NeverScrollableScrollPhysics(),
                 controller: controller,
@@ -138,12 +134,35 @@ class _HomePageState extends State<HomePage> {
                     pageIndex = page;
                   });
                 },
-                children: [const Work(), About(), const Illustrations()],
+                itemCount: 3,
+                itemBuilder: (context, index) {
+                  return SingleChildScrollView(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: width * Dimens.defaultLeftPaddingRatio,
+                      ),
+                      child: _buildPage(index),
+                    ),
+                  );
+                },
               ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  Widget _buildPage(int index) {
+    switch (index) {
+      case 0:
+        return Work();
+      case 1:
+        return About();
+      case 2:
+        return Illustrations();
+      default:
+        return SizedBox.shrink();
+    }
   }
 }

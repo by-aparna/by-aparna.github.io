@@ -5,10 +5,10 @@ import '../view/utils/responsive.dart';
 
 class MyTxtStyles {
   static final TextStyle _headingTextStyle = GoogleFonts.poppins()
-      .copyWith(fontSize: 34, height: 1.2, fontWeight: FontWeight.w600);
+      .copyWith(fontSize: 34, height: 2.0, fontWeight: FontWeight.w600);
 
   static final TextStyle _primaryTextStyle = GoogleFonts.poppins()
-      .copyWith(fontSize: 21, height: 1.3, fontWeight: FontWeight.w400);
+      .copyWith(fontSize: 21, height: 2.0, fontWeight: FontWeight.w400);
 
   static final TextStyle _bodyTextStyle =
       GoogleFonts.poppins().copyWith(fontSize: 20, fontWeight: FontWeight.w400);
@@ -17,10 +17,10 @@ class MyTxtStyles {
       GoogleFonts.poppins().copyWith(fontSize: 15, fontWeight: FontWeight.w400);
 
   static final TextStyle _desktop_headingTextStyle = GoogleFonts.poppins()
-      .copyWith(fontSize: 22, height: 1.2, fontWeight: FontWeight.w600);
+      .copyWith(fontSize: 22, height: 2.0, fontWeight: FontWeight.w600);
 
   static final TextStyle _desktop_primaryTextStyle = GoogleFonts.poppins()
-      .copyWith(fontSize: 18, height: 1.3, fontWeight: FontWeight.w400);
+      .copyWith(fontSize: 18, height: 2.0, fontWeight: FontWeight.w400);
 
   static final TextStyle _desktop_bodyTextStyle =
       GoogleFonts.poppins().copyWith(fontSize: 20, fontWeight: FontWeight.w400);
@@ -29,10 +29,10 @@ class MyTxtStyles {
       GoogleFonts.poppins().copyWith(fontSize: 18, fontWeight: FontWeight.w400);
 
   static final TextStyle _large_headingTextStyle = GoogleFonts.poppins()
-      .copyWith(fontSize: 20, height: 1.2, fontWeight: FontWeight.w600);
+      .copyWith(fontSize: 20, height: 2.5, fontWeight: FontWeight.w600);
 
   static final TextStyle _large_primaryTextStyle = GoogleFonts.poppins()
-      .copyWith(fontSize: 16, height: 1.3, fontWeight: FontWeight.w400);
+      .copyWith(fontSize: 16, height: 2.3, fontWeight: FontWeight.w400);
 
   static final TextStyle _large_bodyTextStyle =
       GoogleFonts.poppins().copyWith(fontSize: 18, fontWeight: FontWeight.w400);
@@ -41,13 +41,13 @@ class MyTxtStyles {
       GoogleFonts.poppins().copyWith(fontSize: 16, fontWeight: FontWeight.w400);
 
   static final TextStyle _mobile_headingTextStyle = GoogleFonts.poppins()
-      .copyWith(fontSize: 16, height: 1.2, fontWeight: FontWeight.w600);
+      .copyWith(fontSize: 18, height: 2.3, fontWeight: FontWeight.w600);
 
   static final TextStyle _mobile_primaryTextStyle = GoogleFonts.poppins()
-      .copyWith(fontSize: 12, height: 1.3, fontWeight: FontWeight.w400);
+      .copyWith(fontSize: 12, height: 2.2, fontWeight: FontWeight.w400);
 
   static final TextStyle _mobile_bodyTextStyle =
-      GoogleFonts.poppins().copyWith(fontSize: 14, fontWeight: FontWeight.w400);
+      GoogleFonts.poppins().copyWith(fontSize: 14, height: 22, fontWeight: FontWeight.w400);
 
   static final TextStyle _mobile_buttonTextStyle =
       GoogleFonts.poppins().copyWith(fontSize: 13, fontWeight: FontWeight.w400);
