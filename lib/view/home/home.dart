@@ -29,6 +29,7 @@ class _HomePageState extends State<HomePage>
   late final AnimationController animationController;
   int pageIndex = 0;
   static const Duration animationDuration = Duration(milliseconds: 200);
+  final ScrollController _scrollcontroller = ScrollController();
 
   @override
   void initState() {
@@ -97,7 +98,15 @@ class _HomePageState extends State<HomePage>
         mainAxisSize: MainAxisSize.max,
         children: [
           GestureDetector(
-            onTap: () => _handleMenuClick(0),
+            onTap: () {
+              _handleMenuClick(-1);
+              if (_introKey.currentContext == null) return;
+
+              Scrollable.ensureVisible(_introKey.currentContext!,
+                  alignment: 0.0, // Adjust alignment as needed
+                  duration: const Duration(milliseconds: 0),
+                  curve: Curves.fastLinearToSlowEaseIn);
+            },
             child: SvgPicture.asset(
                 '${FilePath.imgAssetPath}aparna_chatterjee_logo.svg'),
           ),
@@ -105,7 +114,10 @@ class _HomePageState extends State<HomePage>
           _menu(
             title: Strings.menu_work,
             isSelected: pageIndex == 0,
-            onClick: () => _handleMenuClick(0),
+            onClick: () {
+              _handleMenuClick(0);
+              _scrollToElement(context);
+            },
           ),
           _menu(
             title: Strings.menu_resume,
@@ -123,6 +135,15 @@ class _HomePageState extends State<HomePage>
   }
 
   void _handleMenuClick(int index) {
+    if (index == -1) {
+      setState(() {
+        if (pageIndex != 0) {
+          pageIndex = 0;
+        }
+        controller.jumpTo(0);
+      });
+      return;
+    }
     if (pageIndex != index) {
       setState(() {
         pageIndex = index;
@@ -158,17 +179,13 @@ class _HomePageState extends State<HomePage>
               ),
               Expanded(
                 child: PageView.builder(
-                  scrollDirection: Axis.horizontal,
+                  scrollDirection: Axis.vertical,
                   physics: const NeverScrollableScrollPhysics(),
                   controller: controller,
-                  onPageChanged: (page) {
-                    setState(() {
-                      pageIndex = page;
-                    });
-                  },
                   itemCount: 3,
                   itemBuilder: (context, index) {
                     return SingleChildScrollView(
+                      controller: _scrollcontroller,
                       child: Container(
                         child: _buildPage(index, width),
                       ),
@@ -279,6 +296,20 @@ class _HomePageState extends State<HomePage>
     );
   }
 
+  final GlobalKey _introKey = GlobalKey();
+  final GlobalKey _workkey = GlobalKey();
+
+  void _scrollToElement(BuildContext context) {
+    if (_workkey.currentContext == null) return;
+
+    // Scroll to the calculated offset
+    Scrollable.ensureVisible(
+      _workkey.currentContext!,
+      alignment: 0.0, // Adjust alignment as needed
+      duration: const Duration(milliseconds: 200),
+    );
+  }
+
   Widget _buildPage(int index, double width) {
     double rightPadding =
         Dimens.defaultRightPaddingRatio * MediaQuery.of(context).size.width;
@@ -295,10 +326,12 @@ class _HomePageState extends State<HomePage>
         double _pad = rightPadding + _rpag;
         return Column(children: [
           Padding(
+              key: _introKey,
               padding: EdgeInsets.only(
                   left: _rpag, right: _pad, top: margin, bottom: margin),
               child: _intros()),
           Container(
+              key: _workkey,
               padding: EdgeInsets.only(
                 left: _rpag,
                 top: margin,
