@@ -9,7 +9,6 @@ import 'package:aparna_chatterjee/view/home/pages/resume.dart';
 import 'package:aparna_chatterjee/view/home/pages/work.dart';
 import 'package:aparna_chatterjee/view/utils/textstyle.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../utils/responsive.dart';
