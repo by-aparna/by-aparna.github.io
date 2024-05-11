@@ -10,7 +10,9 @@ class Illustrations extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        const SizedBox(height: 40),
         Align(
           alignment: Alignment.centerLeft,
           child: Text(
@@ -21,7 +23,6 @@ class Illustrations extends StatelessWidget {
         ),
         const SizedBox(height: Dimens.defaultPadding),
         Wrap(
-          alignment: WrapAlignment.spaceEvenly,
           spacing: 24,
           runSpacing: 16,
           children: [

@@ -87,8 +87,11 @@ class _HomePageState extends State<HomePage> {
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: [
-          SvgPicture.asset(
-              '${FilePath.imgAssetPath}aparna_chatterjee_logo.svg'),
+          GestureDetector(
+            onTap: () => _handleMenuClick(-1),
+            child: SvgPicture.asset(
+                '${FilePath.imgAssetPath}aparna_chatterjee_logo.svg'),
+          ),
           const Spacer(),
           _menu(
             title: Strings.menu_work,
@@ -114,7 +117,9 @@ class _HomePageState extends State<HomePage> {
     if (pageIndex != index) {
       setState(() {
         pageIndex = index;
-        _animatePage(index);
+        if (pageIndex != -1) {
+          _animatePage(index);
+        }
       });
     }
   }
@@ -134,8 +139,7 @@ class _HomePageState extends State<HomePage> {
             ),
             Expanded(
               child: PageView.builder(
-                scrollDirection: Axis.vertical,
-                physics: const NeverScrollableScrollPhysics(),
+                scrollDirection: Axis.horizontal,
                 controller: controller,
                 onPageChanged: (page) {
                   setState(() {
