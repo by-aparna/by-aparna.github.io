@@ -18,113 +18,8 @@ class Work extends StatefulWidget {
   State<Work> createState() => _WorkState();
 }
 
-class _WorkState extends State<Work> with SingleTickerProviderStateMixin {
-  late final AnimationController controller;
+class _WorkState extends State<Work> {
   int _isHovered = -1;
-  bool _txtHovered = false;
-
-  @override
-  void initState() {
-    super.initState();
-    controller = AnimationController(
-      vsync: this,
-    );
-  }
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
-
-  Widget _animatedEmoji() {
-    return AnimatedEmoji(
-      AnimatedEmojis.wave,
-      size: Responsive.isLargeMobile(context)
-          ? 34
-          : Responsive.isTablet(context)
-              ? 48
-              : 60,
-      controller: controller,
-      onLoaded: (duration) => controller.duration = duration,
-    );
-  }
-
-  Widget _helloText() {
-    return Wrap(
-      crossAxisAlignment: WrapCrossAlignment.start,
-      alignment: WrapAlignment.start,
-      children: [
-        Text(
-          'Hello, I\'m  ',
-          style: MyTxtStyles.local_headingStyle(context).copyWith(
-            color: MyColors.secondaryTxtColor,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-        MouseRegion(
-          onHover: (_) => setState(() => _txtHovered = true),
-          onExit: (_) => setState(() => _txtHovered = false),
-          child: Text(
-            ' Aparna Chatterjee.  ',
-            style: MyTxtStyles.local_headingStyle(context)
-                .copyWith(
-                    color: MyColors.secondaryTxtColor,
-                    fontWeight: FontWeight.bold)
-                .underlined(
-                    distance: 4,
-                    color: _txtHovered
-                        ? MyColors.highlightColor
-                        : MyColors.secondaryTxtColor),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _intros() {
-    return MouseRegion(
-      onHover: (event) {
-        controller.forward();
-        controller.addStatusListener((status) {
-          if (status == AnimationStatus.completed) {
-            controller.reverse();
-          }
-        });
-      },
-      onExit: (event) => controller.stop(canceled: true),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Wrap(
-            crossAxisAlignment: WrapCrossAlignment.end,
-            alignment: WrapAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 12),
-                child: _animatedEmoji(),
-              ),
-              const SizedBox(width: 8),
-              _helloText(),
-            ],
-          ),
-          const SizedBox(height: 30),
-          Text(
-            Strings.intro_prof,
-            style: MyTxtStyles.local_headingStyle(context)
-                .copyWith(color: MyColors.highlightTxtColor),
-          ),
-          const SizedBox(height: 40),
-          Text(
-            Strings.intro_loc,
-            style: MyTxtStyles.local_primaryTextStyle(context)
-                .copyWith(color: MyColors.secondaryTxtColor),
-          ),
-        ],
-      ),
-    );
-  }
 
   Widget _tag({
     required String title,
@@ -233,19 +128,15 @@ class _WorkState extends State<Work> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    double rightPadding =
-        Dimens.defaultRightPaddingRatio * MediaQuery.of(context).size.width;
     double margin = Responsive.isLargeMobile(context)
         ? 20
         : Responsive.isTablet(context)
             ? 40
             : 100;
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        SizedBox(height: margin),
-        Padding(
-            padding: EdgeInsets.only(right: rightPadding), child: _intros()),
-        SizedBox(height: margin * 2),
         _workpage(),
         SizedBox(height: margin),
       ],
