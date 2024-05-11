@@ -64,7 +64,7 @@ class _ExperienceCardState extends State<ExperienceCard>
       height: 500,
       width: MediaQuery.of(context).size.width * 0.76,
       child: ResponsiveRowColumn(
-        layout: Responsive.isLargeMobile(context)
+        layout: Responsive.isTablet(context)
             ? ResponsiveRowColumnType.COLUMN
             : ResponsiveRowColumnType.ROW,
         children: [
@@ -166,7 +166,7 @@ class _ExperienceCardState extends State<ExperienceCard>
                         duration: const Duration(milliseconds: 300),
                         padding: EdgeInsets.only(
                           right: Dimens.responsiveMargin(context),
-                          top: Dimens.responsiveMargin(context),
+                          top: Dimens.responsiveMargin(context) + 30,
                         ),
                         transform: Matrix4.identity()
                           ..scale(widget.isHovered ? 1.2 : 1.0),

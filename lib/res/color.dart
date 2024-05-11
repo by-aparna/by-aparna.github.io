@@ -7,4 +7,6 @@ class MyColors {
   static const secondaryTxtColor = Color(0xFFB6CBEB);
   static const bodyTxtColor = Color(0xFFA2B7D7);
   static const dividerColor = Color(0xFF878282);
+
+  static const highlightColor = Color(0xFF9C5FFF);
 }

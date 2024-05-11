@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:aparna_chatterjee/res/color.dart';
 import 'package:flutter/material.dart';
 
 extension TextStyleX on TextStyle {
@@ -10,12 +11,12 @@ extension TextStyleX on TextStyle {
     Color? color,
     double distance = 1,
     double thickness = 1,
-    TextDecorationStyle style = TextDecorationStyle.solid,
+    TextDecorationStyle style = TextDecorationStyle.dashed,
   }) {
     return copyWith(
       shadows: [
         Shadow(
-          color: this.color ?? Colors.black,
+          color: this.color ?? MyColors.highlightTxtColor,
           offset: Offset(0, -distance),
         )
       ],

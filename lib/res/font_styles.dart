@@ -5,7 +5,7 @@ import '../view/utils/responsive.dart';
 
 class MyTxtStyles {
   static final TextStyle _headingTextStyle = GoogleFonts.poppins()
-      .copyWith(fontSize: 34, height: 2.0, fontWeight: FontWeight.w600);
+      .copyWith(fontSize: 34, height: 1.6, fontWeight: FontWeight.w600);
 
   static final TextStyle _primaryTextStyle = GoogleFonts.poppins()
       .copyWith(fontSize: 21, height: 2.0, fontWeight: FontWeight.w400);

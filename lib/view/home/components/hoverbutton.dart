@@ -31,13 +31,13 @@ class _HoverCardButtonState extends State<HoverCardButton> {
           const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(10)),
             side: BorderSide(
-              color: Color(0xFF9C5FFF),
+              color: MyColors.highlightColor,
               width: 0.7,
             ),
           ),
         ),
         backgroundColor: WidgetStateProperty.all<Color>(
-          _isHovered ? const Color(0xFF9C5FFF) : Colors.transparent,
+          _isHovered ? MyColors.highlightColor : Colors.transparent,
         ),
       ),
       child: Padding(
@@ -47,7 +47,7 @@ class _HoverCardButtonState extends State<HoverCardButton> {
           style: MyTxtStyles.local_buttonTextStyle(context).copyWith(
             color: _isHovered
                 ? MyColors.secondaryBackground
-                : const Color(0xFF9C5FFF),
+                : MyColors.highlightColor,
             fontWeight: FontWeight.w600,
             fontSize: 20,
           ),

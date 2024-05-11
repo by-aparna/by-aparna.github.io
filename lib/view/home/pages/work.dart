@@ -66,16 +66,15 @@ class _WorkState extends State<Work> with SingleTickerProviderStateMixin {
           onHover: (_) => setState(() => _txtHovered = true),
           onExit: (_) => setState(() => _txtHovered = false),
           child: Text(
-            'Aparna Chatterjee.',
+            ' Aparna Chatterjee.  ',
             style: MyTxtStyles.local_headingStyle(context)
                 .copyWith(
                     color: MyColors.secondaryTxtColor,
-                    fontWeight: FontWeight.w700)
+                    fontWeight: FontWeight.bold)
                 .underlined(
                     distance: 4,
-                    style: TextDecorationStyle.dashed,
                     color: _txtHovered
-                        ? Color(0xFF9C5FFF)
+                        ? MyColors.highlightColor
                         : MyColors.secondaryTxtColor),
           ),
         ),
@@ -99,7 +98,7 @@ class _WorkState extends State<Work> with SingleTickerProviderStateMixin {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Wrap(
-            crossAxisAlignment: WrapCrossAlignment.start,
+            crossAxisAlignment: WrapCrossAlignment.end,
             alignment: WrapAlignment.start,
             children: [
               Padding(
@@ -110,13 +109,13 @@ class _WorkState extends State<Work> with SingleTickerProviderStateMixin {
               _helloText(),
             ],
           ),
-          const SizedBox(height: Dimens.defaultPadding),
+          const SizedBox(height: 30),
           Text(
             Strings.intro_prof,
             style: MyTxtStyles.local_headingStyle(context)
                 .copyWith(color: MyColors.highlightTxtColor),
           ),
-          const SizedBox(height: Dimens.defaultPadding),
+          const SizedBox(height: 40),
           Text(
             Strings.intro_loc,
             style: MyTxtStyles.local_primaryTextStyle(context)

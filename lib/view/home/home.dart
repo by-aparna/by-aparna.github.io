@@ -48,8 +48,10 @@ class _HomePageState extends State<HomePage> {
                     ? MyColors.highlightTxtColor
                     : MyColors.secondaryTxtColor,
                 fontWeight: isSelected ? FontWeight.w500 : FontWeight.w400,
-                height: 0,
               ),
+            ),
+            const SizedBox(
+              height: 6,
             ),
             Container(
               width: 4,
@@ -127,6 +129,9 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             _headers(width),
+            const Divider(
+              thickness: 0.4,
+            ),
             Expanded(
               child: PageView.builder(
                 scrollDirection: Axis.vertical,
