@@ -164,6 +164,10 @@ class _ExperienceCardState extends State<ExperienceCard>
                     Positioned.fill(
                       child: AnimatedContainer(
                         duration: const Duration(milliseconds: 300),
+                        padding: EdgeInsets.only(
+                          right: Dimens.responsiveMargin(context),
+                          top: Dimens.responsiveMargin(context),
+                        ),
                         transform: Matrix4.identity()
                           ..scale(widget.isHovered ? 1.2 : 1.0),
                         color: widget.assetBgColor,
