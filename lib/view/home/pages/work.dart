@@ -1,11 +1,8 @@
-import 'package:animated_emoji/animated_emoji.dart';
 import 'package:aparna_chatterjee/res/color.dart';
-import 'package:aparna_chatterjee/res/dimens.dart';
 import 'package:aparna_chatterjee/res/font_styles.dart';
 import 'package:aparna_chatterjee/res/path.dart';
 import 'package:aparna_chatterjee/res/strings.dart';
 import 'package:aparna_chatterjee/view/utils/responsive.dart';
-import 'package:aparna_chatterjee/view/utils/textstyle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 

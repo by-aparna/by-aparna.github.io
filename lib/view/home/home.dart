@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage>
     required bool isSelected,
     required VoidCallback onClick,
   }) {
-    return GestureDetector(
+    return InkWell(
       onTap: onClick,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: Dimens.menuPadding),
@@ -97,7 +97,7 @@ class _HomePageState extends State<HomePage>
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: [
-          GestureDetector(
+          InkWell(
             onTap: () {
               _handleMenuClick(-1);
               if (_introKey.currentContext == null) return;
@@ -156,20 +156,17 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery
-        .of(context)
-        .size
-        .width;
+    double width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: MyColors.homeBackground,
       body: Container(
         decoration: pageIndex == 0
             ? const BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage('${FilePath.imgAssetPath}bg.png'),
-              fit: BoxFit.none,
-              alignment: Alignment.topCenter),
-        )
+                image: DecorationImage(
+                    image: AssetImage('${FilePath.imgAssetPath}bg.png'),
+                    fit: BoxFit.none,
+                    alignment: Alignment.topCenter),
+              )
             : const BoxDecoration(color: MyColors.secondaryBackground),
         child: Padding(
           padding: const EdgeInsets.only(top: 32),
@@ -216,8 +213,8 @@ class _HomePageState extends State<HomePage>
       size: Responsive.isLargeMobile(context)
           ? 34
           : Responsive.isTablet(context)
-          ? 48
-          : 60,
+              ? 48
+              : 60,
       controller: animationController,
       onLoaded: (duration) => animationController.duration = duration,
     );
@@ -235,20 +232,20 @@ class _HomePageState extends State<HomePage>
             fontWeight: FontWeight.w700,
           ),
         ),
-        MouseRegion(
-          onHover: (_) => setState(() => _txtHovered = true),
-          onExit: (_) => setState(() => _txtHovered = false),
+        InkWell(
+          onHover: (isHovered) => setState(() => _txtHovered = isHovered),
+          onTap: () => _handleMenuClick(1),
           child: Text(
             ' Aparna Chatterjee.  ',
             style: MyTxtStyles.local_headingStyle(context)
                 .copyWith(
-                color: MyColors.secondaryTxtColor,
-                fontWeight: FontWeight.bold)
+                    color: MyColors.secondaryTxtColor,
+                    fontWeight: FontWeight.bold)
                 .underlined(
-                distance: 4,
-                color: _txtHovered
-                    ? MyColors.highlightColor
-                    : MyColors.secondaryTxtColor),
+                    distance: 4,
+                    color: _txtHovered
+                        ? MyColors.highlightColor
+                        : MyColors.secondaryTxtColor),
           ),
         ),
       ],
@@ -315,15 +312,12 @@ class _HomePageState extends State<HomePage>
 
   Widget _buildPage(int index, double width) {
     double rightPadding =
-        Dimens.defaultRightPaddingRatio * MediaQuery
-            .of(context)
-            .size
-            .width;
+        Dimens.defaultRightPaddingRatio * MediaQuery.of(context).size.width;
     double margin = Responsive.isLargeMobile(context)
         ? 20
         : Responsive.isTablet(context)
-        ? 30
-        : 60;
+            ? 30
+            : 60;
     switch (index) {
       case 0:
         double _rpag = (Responsive.isMobile(context)
@@ -343,10 +337,7 @@ class _HomePageState extends State<HomePage>
                 top: margin,
               ),
               color: MyColors.secondaryBackground,
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width,
+              width: MediaQuery.of(context).size.width,
               child: const Work()),
         ]);
       case 1:

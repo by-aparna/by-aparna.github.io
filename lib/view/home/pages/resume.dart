@@ -120,11 +120,14 @@ class About extends StatelessWidget {
   }
 
   Widget _buildImage(context) {
-    return SizedBox(
-      height: min(MediaQuery.of(context).size.width * .6, 900),
-      child: Image.asset(
-        '${FilePath.imgAssetPath}me.jpeg',
-        alignment: Alignment.topCenter,
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(20.0),
+      child: SizedBox(
+        height: min(MediaQuery.of(context).size.width * .6, 900),
+        child: Image.asset(
+          '${FilePath.imgAssetPath}me.jpeg',
+          alignment: Alignment.topCenter,
+        ),
       ),
     );
   }

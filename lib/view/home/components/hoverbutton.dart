@@ -41,16 +41,16 @@ class _HoverCardButtonState extends State<HoverCardButton> {
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
         child: Text(
-          'Resume',
+          'Résumé'.toUpperCase(),
           style: MyTxtStyles.local_buttonTextStyle(context).copyWith(
-            color: _isHovered
-                ? MyColors.secondaryBackground
-                : MyColors.highlightColor,
-            fontWeight: FontWeight.w600,
-            fontSize: 20,
-          ),
+              color: _isHovered
+                  ? MyColors.secondaryBackground
+                  : MyColors.highlightColor,
+              fontWeight: FontWeight.w600,
+              fontSize: 20,
+              letterSpacing: 4),
         ),
       ),
     );

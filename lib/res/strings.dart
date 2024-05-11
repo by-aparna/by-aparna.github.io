@@ -11,7 +11,7 @@ class Strings {
   static const String intro_me = "Hello, I‘m";
   static const String intro_me_name = "Aparna Chatterjee.";
   static const String intro_prof =
-      "I create better experience for People across physical & digital spaces";
+      "I create better experience for People across physical & digital spaces.";
   static const String intro_loc =
       "I'm a Bangalore based product designer with 2.5 years of experience in Web3 design. I'm passionate about enhancing lives through UX/UI design and constantly seek new learning opportunities.";
 }
