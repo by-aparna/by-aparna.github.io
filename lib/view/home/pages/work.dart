@@ -26,7 +26,7 @@ class _WorkState extends State<Work> {
   }) {
     return Container(
       constraints:
-          const BoxConstraints(minHeight: 32, minWidth: 150, maxWidth: 180),
+      const BoxConstraints(minHeight: 32, minWidth: 150, maxWidth: 180),
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
       decoration: BoxDecoration(
         border: Border.all(color: borderColor, width: 0.6),
@@ -61,7 +61,7 @@ class _WorkState extends State<Work> {
             isHovered: _isHovered == 0,
             title: 'Batch Swap',
             description:
-                'Batch swapping enables users to exchange multiple tokens in a single transaction.',
+            'Batch swapping enables users to exchange multiple tokens in a single transaction.',
             tagList: [
               _tag(
                 title: 'Product Design',
@@ -89,6 +89,7 @@ class _WorkState extends State<Work> {
                 fit: BoxFit.contain),
             logoImg: SvgPicture.asset('${FilePath.imgAssetPath}dzap.svg',
                 width: 78, height: 22),
+            url: Strings.dzap_url,
           ),
         ),
         const SizedBox(height: 56),
@@ -100,7 +101,7 @@ class _WorkState extends State<Work> {
             isHovered: _isHovered == 1,
             title: 'Investor Dashboard, Staking',
             description:
-                'A tool for investors to track their token allocations, vesting schedule & claimable tokens in all the funding rounds.',
+            'A tool for investors to track their token allocations, vesting schedule & claimable tokens in all the funding rounds.',
             tagList: [
               _tag(
                 title: 'Product Re-Design',
@@ -117,6 +118,7 @@ class _WorkState extends State<Work> {
             assetBgColor: const Color(0xFF9382FF),
             image: Image.asset('${FilePath.imgAssetPath}staking.png'),
             logoImg: SvgPicture.asset('${FilePath.imgAssetPath}propel.svg'),
+            url: Strings.propel_url,
           ),
         ),
       ],
@@ -128,8 +130,8 @@ class _WorkState extends State<Work> {
     double margin = Responsive.isLargeMobile(context)
         ? 20
         : Responsive.isTablet(context)
-            ? 40
-            : 100;
+        ? 40
+        : 100;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,

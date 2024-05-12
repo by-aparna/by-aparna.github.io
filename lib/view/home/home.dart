@@ -30,6 +30,8 @@ class _HomePageState extends State<HomePage>
   static const Duration animationDuration = Duration(milliseconds: 200);
   final ScrollController _scrollcontroller = ScrollController();
 
+  double _containerTopOffset = double.infinity;
+
   @override
   void initState() {
     super.initState();
@@ -37,6 +39,7 @@ class _HomePageState extends State<HomePage>
     animationController = AnimationController(
       vsync: this,
     );
+    _scrollcontroller.addListener(_scrollListener);
   }
 
   Widget _menu({
@@ -159,7 +162,8 @@ class _HomePageState extends State<HomePage>
     return Scaffold(
       backgroundColor: MyColors.homeBackground,
       body: Container(
-        decoration: pageIndex == 0
+        decoration: pageIndex == 0 &&
+                _containerTopOffset >= Dimens.responsiveMargin(context)
             ? const BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage('${FilePath.imgAssetPath}bg.png'),
@@ -203,7 +207,21 @@ class _HomePageState extends State<HomePage>
   void dispose() {
     controller.dispose();
     animationController.dispose();
+    _scrollcontroller.removeListener(_scrollListener);
+    _scrollcontroller.dispose();
     super.dispose();
+  }
+
+  void _scrollListener() {
+    final RenderBox? containerRenderBox =
+        _workkey.currentContext?.findRenderObject() as RenderBox?;
+    if (containerRenderBox != null) {
+      final containerPosition =
+          containerRenderBox.localToGlobal(Offset.zero).dy;
+      setState(() {
+        _containerTopOffset = containerPosition - 50;
+      });
+    }
   }
 
   Widget _animatedEmoji() {
@@ -304,7 +322,7 @@ class _HomePageState extends State<HomePage>
     // Scroll to the calculated offset
     Scrollable.ensureVisible(
       _workkey.currentContext!,
-      alignment: 0.0, // Adjust alignment as needed
+      alignment: 0.1, // Adjust alignment as needed
       duration: const Duration(milliseconds: 200),
     );
   }

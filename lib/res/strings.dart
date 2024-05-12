@@ -1,4 +1,3 @@
-
 class Strings {
   static const String menu_work = "Work";
   static const String menu_resume = "About";
@@ -14,4 +13,10 @@ class Strings {
       "I create better experience for People across physical & digital spaces.";
   static const String intro_loc =
       "I'm a Bangalore based product designer with 2.5 years of experience in Web3 design. I'm passionate about enhancing lives through UX/UI design and constantly seek new learning opportunities.";
+
+  static const String propel_url =
+      "https://medium.com/@chatterjee.aparna1996/redesigning-propels-investor-dashboard-and-adding-staking-ui-feature-5747ebd18adc";
+
+  static const String dzap_url =
+      "https://medium.com/@chatterjee.aparna1996/dzap-striving-to-unify-multi-step-processes-in-dex-into-one-with-least-friction-640e64bd4a2e";
 }
