@@ -271,7 +271,7 @@ class _HomePageState extends State<HomePage>
 
   Widget _intros() {
     return MouseRegion(
-      onHover: (event) {
+      onEnter: (event) {
         animationController.forward();
         animationController.addStatusListener((status) {
           if (status == AnimationStatus.completed) {
