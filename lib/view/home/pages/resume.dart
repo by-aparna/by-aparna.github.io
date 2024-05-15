@@ -20,7 +20,7 @@ class About extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(
-              height: 82,
+              height: 40,
             ),
             Text(
               'Meet Aparna',
