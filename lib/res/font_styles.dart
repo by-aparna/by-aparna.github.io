@@ -26,7 +26,7 @@ class MyTxtStyles {
       GoogleFonts.poppins().copyWith(fontSize: 20, fontWeight: FontWeight.w400);
 
   static final TextStyle _desktop_buttonTextStyle =
-      GoogleFonts.poppins().copyWith(fontSize: 18, fontWeight: FontWeight.w400);
+      GoogleFonts.poppins().copyWith(fontSize: 14, fontWeight: FontWeight.w400);
 
   static final TextStyle _large_headingTextStyle = GoogleFonts.poppins()
       .copyWith(fontSize: 20, height: 2.5, fontWeight: FontWeight.w600);
@@ -38,7 +38,7 @@ class MyTxtStyles {
       GoogleFonts.poppins().copyWith(fontSize: 18, fontWeight: FontWeight.w400);
 
   static final TextStyle _large_buttonTextStyle =
-      GoogleFonts.poppins().copyWith(fontSize: 16, fontWeight: FontWeight.w400);
+      GoogleFonts.poppins().copyWith(fontSize: 13, fontWeight: FontWeight.w400);
 
   static final TextStyle _mobile_headingTextStyle = GoogleFonts.poppins()
       .copyWith(fontSize: 18, height: 2.3, fontWeight: FontWeight.w600);
@@ -50,7 +50,7 @@ class MyTxtStyles {
       .copyWith(fontSize: 14, height: 22, fontWeight: FontWeight.w400);
 
   static final TextStyle _mobile_buttonTextStyle =
-      GoogleFonts.poppins().copyWith(fontSize: 13, fontWeight: FontWeight.w400);
+      GoogleFonts.poppins().copyWith(fontSize: 12, fontWeight: FontWeight.w400);
 
   static TextStyle local_headingStyle(context) => Responsive.isMobile(context)
       ? MyTxtStyles._mobile_headingTextStyle

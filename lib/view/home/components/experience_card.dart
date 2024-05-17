@@ -67,7 +67,7 @@ class _ExperienceCardState extends State<ExperienceCard>
           border: Border.all(color: widget.cardBorderColor),
           borderRadius: const BorderRadius.all(Radius.circular(14)),
         ),
-        height: 500,
+        height: Responsive.isLargeMobile(context) ? 600 : 500,
         width: MediaQuery.of(context).size.width * 0.76,
         child: ResponsiveRowColumn(
           layout: Responsive.isTablet(context)
@@ -160,13 +160,13 @@ class _ExperienceCardState extends State<ExperienceCard>
                 child: ClipRRect(
                   borderRadius: BorderRadius.only(
                     topLeft: Responsive.isLargeMobile(context)
-                        ? Radius.circular(16)
-                        : Radius.circular(0),
-                    topRight: Radius.circular(16),
-                    bottomLeft: Radius.circular(0),
+                        ? const Radius.circular(16)
+                        : const Radius.circular(0),
+                    topRight: const Radius.circular(16),
+                    bottomLeft: const Radius.circular(0),
                     bottomRight: Responsive.isLargeMobile(context)
-                        ? Radius.circular(0)
-                        : Radius.circular(16),
+                        ? const Radius.circular(0)
+                        : const Radius.circular(16),
                   ),
                   child: Stack(
                     children: [
