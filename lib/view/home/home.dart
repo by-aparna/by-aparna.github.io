@@ -47,24 +47,22 @@ class _HomePageState extends State<HomePage>
     required bool isSelected,
     required VoidCallback onClick,
   }) {
+    final textStyle = MyTxtStyles.local_primaryTextStyle(context).copyWith(
+      color:
+          isSelected ? MyColors.highlightTxtColor : MyColors.secondaryTxtColor,
+      fontWeight: isSelected ? FontWeight.w500 : FontWeight.w400,
+    );
     return InkWell(
       onTap: onClick,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: Dimens.menuPadding),
-        child: Column(
+        child: Row(
           children: [
             Text(
               title,
-              style: MyTxtStyles.local_primaryTextStyle(context).copyWith(
-                color: isSelected
-                    ? MyColors.highlightTxtColor
-                    : MyColors.secondaryTxtColor,
-                fontWeight: isSelected ? FontWeight.w500 : FontWeight.w400,
-              ),
+              style: textStyle,
             ),
-            const SizedBox(
-              height: 6,
-            ),
+            const SizedBox(width: 8), // Adjust spacing as needed
             Container(
               width: 4,
               height: 4,
@@ -90,21 +88,22 @@ class _HomePageState extends State<HomePage>
   }
 
   Widget _headers(double width) {
-    return Container(
-      padding: EdgeInsets.only(
-        bottom: 16,
-        left: width * Dimens.defaultLeftPaddingRatio,
-        right: width * Dimens.defaultRightPaddingRatio,
-      ),
+    final leftPadding = width * Dimens.defaultLeftPaddingRatio;
+    final rightPadding = width * Dimens.defaultRightPaddingRatio;
+
+    return Padding(
+      padding:
+          EdgeInsets.only(bottom: 16, left: leftPadding, right: rightPadding),
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: [
           InkWell(
             onTap: () {
               _handleMenuClick(-1);
-              if (_introKey.currentContext == null) return;
+              final introContext = _introKey.currentContext;
+              if (introContext == null) return;
 
-              Scrollable.ensureVisible(_introKey.currentContext!,
+              Scrollable.ensureVisible(introContext,
                   alignment: 0.0, // Adjust alignment as needed
                   duration: const Duration(milliseconds: 0),
                   curve: Curves.fastLinearToSlowEaseIn);
@@ -113,45 +112,44 @@ class _HomePageState extends State<HomePage>
                 '${FilePath.imgAssetPath}aparna_chatterjee_logo.svg'),
           ),
           const Spacer(),
-          _menu(
-            title: Strings.menu_work,
-            isSelected: pageIndex == 0,
-            onClick: () {
-              _handleMenuClick(0);
-              _scrollToElement(context);
-            },
-          ),
-          _menu(
-            title: Strings.menu_resume,
-            isSelected: pageIndex == 1,
-            onClick: () => _handleMenuClick(1),
-          ),
-          _menu(
-            title: Strings.menu_illus,
-            isSelected: pageIndex == 2,
-            onClick: () => _handleMenuClick(2),
-          ),
+          _menuItem(Strings.menu_work, 0),
+          _menuItem(Strings.menu_resume, 1),
+          _menuItem(Strings.menu_illus, 2),
         ],
       ),
     );
   }
 
+  Widget _menuItem(String title, int index) {
+    final isSelected = pageIndex == index;
+
+    return _menu(
+      title: title,
+      isSelected: isSelected,
+      onClick: () {
+        _handleMenuClick(index);
+        if (index != -1) {
+          _scrollToElement(context);
+        }
+      },
+    );
+  }
+
   void _handleMenuClick(int index) {
     if (index == -1) {
-      setState(() {
-        if (pageIndex != 0) {
+      if (pageIndex != 0) {
+        setState(() {
           pageIndex = 0;
-        }
-        controller.jumpTo(0);
-      });
+          controller.jumpTo(0);
+        });
+      }
       return;
     }
-    if (pageIndex != index) {
+
+    if (pageIndex != index && index != -1) {
       setState(() {
         pageIndex = index;
-        if (pageIndex != -1) {
-          _animatePage(index);
-        }
+        _animatePage(index);
       });
     }
   }
@@ -206,9 +204,9 @@ class _HomePageState extends State<HomePage>
   @override
   void dispose() {
     controller.dispose();
-    animationController.dispose();
     _scrollcontroller.removeListener(_scrollListener);
     _scrollcontroller.dispose();
+    animationController.dispose();
     super.dispose();
   }
 
@@ -218,9 +216,11 @@ class _HomePageState extends State<HomePage>
     if (containerRenderBox != null) {
       final containerPosition =
           containerRenderBox.localToGlobal(Offset.zero).dy;
-      setState(() {
-        _containerTopOffset = containerPosition - 50;
-      });
+      if (_containerTopOffset != containerPosition - 50) {
+        setState(() {
+          _containerTopOffset = containerPosition - 50;
+        });
+      }
     }
   }
 
@@ -238,31 +238,35 @@ class _HomePageState extends State<HomePage>
   }
 
   Widget _helloText() {
+    final TextStyle textStyle =
+        MyTxtStyles.local_headingStyle(context).copyWith(
+      color: MyColors.secondaryTxtColor,
+      fontWeight: FontWeight.w700,
+    );
+
+    final TextStyle highlightedTextStyle = textStyle.copyWith(
+      fontWeight: FontWeight.bold,
+    );
+
     return Wrap(
       crossAxisAlignment: WrapCrossAlignment.start,
       alignment: WrapAlignment.start,
       children: [
         Text(
           'Hello, I\'m  ',
-          style: MyTxtStyles.local_headingStyle(context).copyWith(
-            color: MyColors.secondaryTxtColor,
-            fontWeight: FontWeight.w700,
-          ),
+          style: textStyle,
         ),
         InkWell(
           onHover: (isHovered) => setState(() => _txtHovered = isHovered),
           onTap: () => _handleMenuClick(1),
           child: Text(
             ' Aparna Chatterjee.  ',
-            style: MyTxtStyles.local_headingStyle(context)
-                .copyWith(
-                    color: MyColors.secondaryTxtColor,
-                    fontWeight: FontWeight.bold)
-                .underlined(
-                    distance: 4,
-                    color: _txtHovered
-                        ? MyColors.highlightColor
-                        : MyColors.secondaryTxtColor),
+            style: highlightedTextStyle.underlined(
+              distance: 4,
+              color: _txtHovered
+                  ? MyColors.highlightColor
+                  : MyColors.secondaryTxtColor,
+            ),
           ),
         ),
       ],
