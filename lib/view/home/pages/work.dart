@@ -2,6 +2,7 @@ import 'package:aparna_chatterjee/res/color.dart';
 import 'package:aparna_chatterjee/res/font_styles.dart';
 import 'package:aparna_chatterjee/res/path.dart';
 import 'package:aparna_chatterjee/res/strings.dart';
+import 'package:aparna_chatterjee/view/home/components/work_footer.dart';
 import 'package:aparna_chatterjee/view/utils/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -26,7 +27,7 @@ class _WorkState extends State<Work> {
   }) {
     return Container(
       constraints:
-      const BoxConstraints(minHeight: 32, minWidth: 150, maxWidth: 180),
+          const BoxConstraints(minHeight: 32, minWidth: 150, maxWidth: 180),
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
       decoration: BoxDecoration(
         border: Border.all(color: borderColor, width: 0.6),
@@ -61,7 +62,7 @@ class _WorkState extends State<Work> {
             isHovered: _isHovered == 0,
             title: 'Batch Swap',
             description:
-            'Batch swapping enables users to exchange multiple tokens in a single transaction.',
+                'Batch swapping enables users to exchange multiple tokens in a single transaction.',
             tagList: [
               _tag(
                 title: 'Product Design',
@@ -101,7 +102,7 @@ class _WorkState extends State<Work> {
             isHovered: _isHovered == 1,
             title: 'Investor Dashboard, Staking',
             description:
-            'A tool for investors to track their token allocations, vesting schedule & claimable tokens in all the funding rounds.',
+                'A tool for investors to track their token allocations, vesting schedule & claimable tokens in all the funding rounds.',
             tagList: [
               _tag(
                 title: 'Product Re-Design',
@@ -128,10 +129,10 @@ class _WorkState extends State<Work> {
   @override
   Widget build(BuildContext context) {
     double margin = Responsive.isLargeMobile(context)
-        ? 20
-        : Responsive.isTablet(context)
         ? 40
-        : 100;
+        : Responsive.isTablet(context)
+            ? 60
+            : 160;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,

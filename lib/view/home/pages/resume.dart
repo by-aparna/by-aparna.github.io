@@ -32,6 +32,7 @@ class About extends StatelessWidget {
               height: 28,
             ),
             Container(
+              padding: const EdgeInsets.only(bottom: 50),
                 child: isLargeMobile
                     ? _mobileAboutMeLayout(context)
                     : _desktopAboutMeLayout(context))

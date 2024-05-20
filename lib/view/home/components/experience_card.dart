@@ -78,7 +78,7 @@ class _ExperienceCardState extends State<ExperienceCard>
               rowOrder: 1,
               columnOrder: 2,
               child: Expanded(
-                flex: 10,
+                flex: 1,
                 child: MouseRegion(
                   onEnter: (_) => _controller.forward(),
                   onExit: (_) => _controller.reverse(),
@@ -156,7 +156,7 @@ class _ExperienceCardState extends State<ExperienceCard>
               rowOrder: 2,
               columnOrder: 1,
               child: Expanded(
-                flex: 11,
+                flex: 1,
                 child: ClipRRect(
                   borderRadius: BorderRadius.only(
                     topLeft: Responsive.isLargeMobile(context)

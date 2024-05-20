@@ -19,4 +19,8 @@ class Strings {
 
   static const String dzap_url =
       "https://medium.com/@chatterjee.aparna1996/dzap-striving-to-unify-multi-step-processes-in-dex-into-one-with-least-friction-640e64bd4a2e";
+
+
+  static const String lbl_connect = "Let’s connect";
+  static const String desc_connect = "Get in touch for opportunities or just say hi! ";
 }

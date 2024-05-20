@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../utils/responsive.dart';
+import 'components/work_footer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -150,6 +151,9 @@ class _HomePageState extends State<HomePage>
       setState(() {
         pageIndex = index;
         _animatePage(index);
+        if(index == 0) {
+          _containerTopOffset = double.infinity;
+        }
       });
     }
   }
@@ -360,6 +364,7 @@ class _HomePageState extends State<HomePage>
               color: MyColors.secondaryBackground,
               width: MediaQuery.of(context).size.width,
               child: const Work()),
+          const WorkFooter(),
         ]);
       case 1:
         return Container(
