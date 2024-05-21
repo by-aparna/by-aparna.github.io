@@ -111,7 +111,9 @@ class _HomePageState extends State<HomePage>
                   curve: Curves.fastLinearToSlowEaseIn);
             },
             child: SvgPicture.asset(
-                '${FilePath.imgAssetPath}aparna_chatterjee_logo.svg'),
+              '${FilePath.imgAssetPath}aparna_chatterjee_logo.svg',
+              width: MyTxtStyles.local_primaryFontSize(context) + 20,
+            ),
           ),
           const Spacer(),
           _menuItem(Strings.menu_work, 0),
@@ -347,25 +349,27 @@ class _HomePageState extends State<HomePage>
             : 60;
     switch (index) {
       case 0:
-        double _rpag = (Responsive.isMobile(context)
+        double left_pad = (Responsive.isMobile(context)
             ? (width * .06)
             : (width * Dimens.defaultLeftPaddingRatio));
-        double _pad = rightPadding + _rpag;
+        double _pad = rightPadding + left_pad;
         return Column(children: [
           Padding(
               key: _introKey,
               padding: EdgeInsets.only(
-                  left: _rpag, right: _pad, top: margin, bottom: margin),
+                  left: left_pad + (Responsive.isMobile(context) ? 20 : 0),
+                  right: _pad,
+                  top: margin,
+                  bottom: margin),
               child: _intros()),
           Container(
               key: _workkey,
               padding: EdgeInsets.only(
-                left: _rpag,
                 top: margin,
               ),
               color: MyColors.secondaryBackground,
               width: MediaQuery.of(context).size.width,
-              child: const Work()),
+              child: const Center(child: Work())),
         ]);
       case 1:
         return Container(

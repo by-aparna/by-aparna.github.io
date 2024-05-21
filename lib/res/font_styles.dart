@@ -44,7 +44,7 @@ class MyTxtStyles {
       .copyWith(fontSize: 18, height: 2.3, fontWeight: FontWeight.w600);
 
   static final TextStyle _mobile_primaryTextStyle = GoogleFonts.poppins()
-      .copyWith(fontSize: 12, height: 2.2, fontWeight: FontWeight.w400);
+      .copyWith(fontSize: 14, height: 2.2, fontWeight: FontWeight.w400);
 
   static final TextStyle _mobile_bodyTextStyle = GoogleFonts.poppins()
       .copyWith(fontSize: 14, height: 22, fontWeight: FontWeight.w400);
