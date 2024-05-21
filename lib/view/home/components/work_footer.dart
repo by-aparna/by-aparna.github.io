@@ -28,6 +28,7 @@ class WorkFooter extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
+        const SizedBox(height: 60,),
         Text(
           Strings.lbl_connect,
           style: MyTxtStyles.local_headingStyle(context)

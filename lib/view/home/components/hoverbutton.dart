@@ -1,4 +1,5 @@
 import 'package:aparna_chatterjee/res/color.dart';
+import 'package:aparna_chatterjee/res/dimens.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
@@ -41,7 +42,7 @@ class _HoverCardButtonState extends State<HoverCardButton> {
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+        padding: Dimens.responsivePadding(context),
         child: Text(
           'Résumé'.toUpperCase(),
           style: MyTxtStyles.local_buttonTextStyle(context).copyWith(
@@ -49,7 +50,7 @@ class _HoverCardButtonState extends State<HoverCardButton> {
                   ? MyColors.secondaryBackground
                   : MyColors.highlightColor,
               fontWeight: FontWeight.w600,
-              fontSize: 20,
+              fontSize: MyTxtStyles.local_ctaFontSize(context),
               letterSpacing: 4),
         ),
       ),

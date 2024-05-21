@@ -77,6 +77,14 @@ class MyTxtStyles {
               ? 22
               : 28;
 
+  static double local_ctaFontSize(context) => Responsive.isMobile(context)
+      ? 16
+      : Responsive.isLargeMobile(context)
+          ? 20
+          : Responsive.isTablet(context)
+              ? 22
+              : 24;
+
   static TextStyle local_bodyTextStyle(context) => Responsive.isMobile(context)
       ? MyTxtStyles._mobile_bodyTextStyle
       : Responsive.isLargeMobile(context)

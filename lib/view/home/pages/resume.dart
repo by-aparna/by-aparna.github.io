@@ -32,7 +32,6 @@ class About extends StatelessWidget {
               height: 28,
             ),
             Container(
-              padding: const EdgeInsets.only(bottom: 50),
                 child: isLargeMobile
                     ? _mobileAboutMeLayout(context)
                     : _desktopAboutMeLayout(context))
@@ -115,7 +114,12 @@ class About extends StatelessWidget {
         const SizedBox(
           height: 28,
         ),
-        const HoverCardButton(),
+        Align(
+          alignment: Responsive.isLargeMobile(context)
+              ? Alignment.center
+              : Alignment.centerLeft,
+          child: const HoverCardButton(),
+        )
       ],
     );
   }

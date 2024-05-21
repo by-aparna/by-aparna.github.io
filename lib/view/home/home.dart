@@ -152,7 +152,7 @@ class _HomePageState extends State<HomePage>
       setState(() {
         pageIndex = index;
         _animatePage(index);
-        if(index == 0) {
+        if (index == 0) {
           _containerTopOffset = double.infinity;
         }
       });
@@ -192,9 +192,10 @@ class _HomePageState extends State<HomePage>
                   itemBuilder: (context, index) {
                     return SingleChildScrollView(
                       controller: _scrollcontroller,
-                      child: Container(
-                        child: _buildPage(index, width),
-                      ),
+                      child: Column(children: [
+                        _buildPage(index, width),
+                        const WorkFooter(),
+                      ]),
                     );
                   },
                 ),
@@ -365,7 +366,6 @@ class _HomePageState extends State<HomePage>
               color: MyColors.secondaryBackground,
               width: MediaQuery.of(context).size.width,
               child: const Work()),
-          const WorkFooter(),
         ]);
       case 1:
         return Container(

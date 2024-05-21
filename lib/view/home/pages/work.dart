@@ -129,10 +129,10 @@ class _WorkState extends State<Work> {
   @override
   Widget build(BuildContext context) {
     double margin = Responsive.isLargeMobile(context)
-        ? 40
+        ? 20
         : Responsive.isTablet(context)
-            ? 60
-            : 160;
+            ? 40
+            : 100;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
