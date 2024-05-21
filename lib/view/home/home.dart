@@ -39,6 +39,7 @@ class _HomePageState extends State<HomePage>
     controller = PageController(initialPage: pageIndex);
     animationController = AnimationController(
       vsync: this,
+      duration: const Duration(seconds: 2),
     );
     _scrollcontroller.addListener(_scrollListener);
   }
