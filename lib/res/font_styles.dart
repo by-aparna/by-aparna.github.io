@@ -60,6 +60,16 @@ class MyTxtStyles {
               ? MyTxtStyles._desktop_headingTextStyle
               : MyTxtStyles._headingTextStyle;
 
+  static TextStyle local_secondaryHeadingStyle(context) => Responsive.isMobile(context)
+      ? MyTxtStyles._mobile_headingTextStyle
+      : Responsive.isLargeMobile(context)
+          ? MyTxtStyles._large_headingTextStyle
+          : Responsive.isTablet(context)
+              ? MyTxtStyles._desktop_headingTextStyle
+              : MyTxtStyles._headingTextStyle.copyWith(
+    fontSize: 26
+  );
+
   static TextStyle local_primaryTextStyle(context) =>
       Responsive.isMobile(context)
           ? MyTxtStyles._mobile_primaryTextStyle

@@ -38,7 +38,7 @@ class _HoverCardButtonState extends State<HoverCardButton> {
           ),
         ),
         backgroundColor: WidgetStateProperty.all<Color>(
-          _isHovered ? MyColors.highlightColor : Colors.transparent,
+          _isHovered ? MyColors.highlightColor : MyColors.secondaryBackground,
         ),
       ),
       child: Padding(

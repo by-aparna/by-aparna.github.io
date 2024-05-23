@@ -15,7 +15,7 @@ class ExperienceCard extends StatefulWidget {
   final Color descriptionBgColor;
   final Color assetBgColor;
   final Color cardBorderColor;
-  final Image image;
+  final Widget image;
   final SvgPicture logoImg;
   final bool isHovered;
   final String url;

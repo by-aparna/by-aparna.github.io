@@ -19,6 +19,22 @@ class Work extends StatefulWidget {
 class _WorkState extends State<Work> {
   int _isHovered = -1;
 
+  late SvgPicture proj1Img;
+  late Image proj2Img;
+
+  @override
+  void initState() {
+    proj1Img = SvgPicture.asset('${FilePath.imgAssetPath}dzap.svg', fit: BoxFit.contain);
+    proj2Img = Image.asset('${FilePath.imgAssetPath}propel_bg.png', fit: BoxFit.contain);
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    precacheImage(proj2Img.image, context);
+  }
+
   Widget _tag({
     required String title,
     required Color titleColor,
@@ -86,9 +102,8 @@ class _WorkState extends State<Work> {
             cardBorderColor: const Color(0xFF424247),
             descriptionBgColor: const Color(0xFF020309).withOpacity(0.1),
             assetBgColor: const Color(0xFF65CDA8),
-            image: Image.asset('${FilePath.imgAssetPath}batch_swap.png',
-                fit: BoxFit.contain),
-            logoImg: SvgPicture.asset('${FilePath.imgAssetPath}dzap.svg',
+            image: proj1Img,
+            logoImg: SvgPicture.asset('${FilePath.imgAssetPath}dzap_logo.svg',
                 width: 78, height: 22),
             url: Strings.dzap_url,
           ),
@@ -117,7 +132,7 @@ class _WorkState extends State<Work> {
             cardBorderColor: const Color(0xFF424247),
             descriptionBgColor: const Color(0xFF020309).withOpacity(0.1),
             assetBgColor: const Color(0xFF9382FF),
-            image: Image.asset('${FilePath.imgAssetPath}staking.png'),
+            image: proj2Img,
             logoImg: SvgPicture.asset('${FilePath.imgAssetPath}propel.svg'),
             url: Strings.propel_url,
           ),

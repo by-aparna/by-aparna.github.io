@@ -27,7 +27,7 @@ class Illustrations extends StatelessWidget {
           alignment: Alignment.centerLeft,
           child: Text(
             Strings.lbl_wed_illus,
-            style: MyTxtStyles.local_headingStyle(context)
+            style: MyTxtStyles.local_secondaryHeadingStyle(context)
                 .copyWith(color: Colors.white, fontWeight: FontWeight.w400),
           ),
         ),
@@ -47,9 +47,8 @@ class Illustrations extends StatelessWidget {
           ],
         ),
         const SizedBox(
-          height: 24,
+          height: 48,
         ),
-        const Divider(),
         const SizedBox(height: Dimens.defaultPadding),
         Align(
           alignment: Alignment.centerLeft,
