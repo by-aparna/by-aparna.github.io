@@ -14,7 +14,6 @@ class ExperienceCard extends StatefulWidget {
   final List<Widget> tagList;
   final Color descriptionBgColor;
   final Color assetBgColor;
-  final Color cardBorderColor;
   final Widget image;
   final SvgPicture logoImg;
   final bool isHovered;
@@ -27,7 +26,6 @@ class ExperienceCard extends StatefulWidget {
       required this.tagList,
       required this.descriptionBgColor,
       required this.assetBgColor,
-      required this.cardBorderColor,
       required this.image,
       required this.logoImg,
       required this.isHovered,
@@ -64,7 +62,7 @@ class _ExperienceCardState extends State<ExperienceCard>
       },
       child: Container(
         decoration: BoxDecoration(
-          border: Border.all(color: widget.cardBorderColor),
+          border: Border.all(color: widget.assetBgColor.withOpacity(0.8), width: 0.8),
           borderRadius: const BorderRadius.all(Radius.circular(14)),
         ),
         height: Responsive.isLargeMobile(context) ? 600 : 500,
@@ -93,7 +91,7 @@ class _ExperienceCardState extends State<ExperienceCard>
                             color: widget.isHovered
                                 ? widget.assetBgColor
                                 : widget.descriptionBgColor,
-                            width: widget.isHovered ? 0.5 : 1,
+                            width: widget.isHovered ? 0.8 : 1,
                           ),
                         ),
                         borderRadius: BorderRadius.circular(12),
