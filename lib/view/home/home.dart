@@ -44,6 +44,13 @@ class _HomePageState extends State<HomePage>
     _scrollcontroller.addListener(_scrollListener);
   }
 
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    animationController.forward();
+  }
+
   Widget _menu({
     required String title,
     required bool isSelected,
@@ -281,15 +288,27 @@ class _HomePageState extends State<HomePage>
     );
   }
 
+  void _animateOnHover() {
+    int animationCount = 0;
+
+    animationController.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        animationController.reverse();
+      } else if (status == AnimationStatus.dismissed) {
+        animationCount++;
+        if (animationCount < 3) {
+          animationController.forward();
+        }
+      }
+    });
+
+    animationController.forward(from: 0.0);
+  }
+
   Widget _intros() {
     return MouseRegion(
       onEnter: (event) {
-        animationController.forward();
-        animationController.addStatusListener((status) {
-          if (status == AnimationStatus.completed) {
-            animationController.reverse();
-          }
-        });
+        _animateOnHover();
       },
       onExit: (event) => animationController.stop(canceled: true),
       child: Column(
