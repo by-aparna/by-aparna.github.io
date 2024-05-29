@@ -25,7 +25,7 @@ class _WorkState extends State<Work> {
   @override
   void initState() {
     proj1Img = SvgPicture.asset('${FilePath.imgAssetPath}dzap.svg', fit: BoxFit.contain);
-    proj2Img = Image.asset('${FilePath.imgAssetPath}propel_bg.png', fit: BoxFit.contain);
+    proj2Img = Image.asset('${FilePath.imgAssetPath}propel_bg.png', fit: BoxFit.contain,);
     super.initState();
   }
 
@@ -133,6 +133,43 @@ class _WorkState extends State<Work> {
             image: proj2Img,
             logoImg: SvgPicture.asset('${FilePath.imgAssetPath}propel.svg'),
             url: Strings.propel_url,
+          ),
+        ),
+        const SizedBox(height: 56),
+        MouseRegion(
+          onHover: (_) => setState(() => _isHovered = 2),
+          onEnter: (_) => setState(() => _isHovered = 2),
+          onExit: (_) => setState(() => _isHovered = -1),
+          child: ExperienceCard(
+            isHovered: _isHovered == 2,
+            title: 'Professional Networking',
+            description:
+                'Klout is a professional networking app that connects nearby professionals features real-time search capabilities, & customizable meeting availability.',
+            tagList: [
+              _tag(
+                title: 'Product Design',
+                titleColor: const Color(0xFF99C2FF),
+                borderColor: const Color(0xFF2966C2),
+                gradient: LinearGradient(colors: [
+                  const Color(0xFF00407A).withOpacity(0.2),
+                  const Color(0xFF56AAF7).withOpacity(0.2)
+                ]),
+              ),
+              _tag(
+                title: 'Brand Design',
+                titleColor: const Color(0xFFFFA279),
+                borderColor: const Color(0xFFC25729),
+                gradient: LinearGradient(colors: [
+                  const Color(0xFF7A3300).withOpacity(0.2),
+                  const Color(0xFFF79056).withOpacity(0.2)
+                ]),
+              ),
+            ],
+            descriptionBgColor: const Color(0xFF020309).withOpacity(0.1),
+            assetBgColor: const Color(0xFFB7FFFF),
+            image: SvgPicture.asset('${FilePath.imgAssetPath}klout_bg.svg'),
+            logoImg: SvgPicture.asset('${FilePath.imgAssetPath}klout_logo.svg'),
+            url: "",
           ),
         ),
       ],

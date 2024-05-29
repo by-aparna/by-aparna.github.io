@@ -58,11 +58,14 @@ class _ExperienceCardState extends State<ExperienceCard>
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
-        await launch(widget.url, forceSafariVC: false);
+        if (widget.url.isNotEmpty) {
+          await launch(widget.url, forceSafariVC: false);
+        }
       },
       child: Container(
         decoration: BoxDecoration(
-          border: Border.all(color: widget.assetBgColor.withOpacity(0.8), width: 0.8),
+          border: Border.all(
+              color: widget.assetBgColor.withOpacity(0.8), width: 0.8),
           borderRadius: const BorderRadius.all(Radius.circular(14)),
         ),
         height: Responsive.isLargeMobile(context) ? 600 : 500,
@@ -141,6 +144,27 @@ class _ExperienceCardState extends State<ExperienceCard>
                                 runSpacing: 8,
                                 children: widget.tagList,
                               ),
+                              widget.url.isEmpty
+                                  ? Column(
+                                      children: [
+                                        const SizedBox(
+                                            height: Dimens.defaultPadding),
+                                        const SizedBox(
+                                            height: Dimens.defaultPadding),
+                                        Text(
+                                          'Coming Soon...',
+                                          style: MyTxtStyles.local_headingStyle(
+                                                  context)
+                                              .copyWith(
+                                                  fontSize: MyTxtStyles
+                                                      .local_ctaFontSize(
+                                                          context),
+                                                  color: MyColors
+                                                      .highlightTxtColor),
+                                        )
+                                      ],
+                                    )
+                                  : const SizedBox()
                             ],
                           ),
                         ),
