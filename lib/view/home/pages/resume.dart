@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:aparna_chatterjee/res/color.dart';
@@ -8,8 +9,59 @@ import 'package:flutter/material.dart';
 import '../../utils/responsive.dart';
 import '../components/hoverbutton.dart';
 
-class About extends StatelessWidget {
+class About extends StatefulWidget {
   const About({super.key});
+
+  @override
+  State<About> createState() => _AboutState();
+}
+
+class _AboutState extends State<About> {
+  BlendMode _blendMode = BlendMode.values.first;
+  int _currentIndex = 0;
+  final List<ColorFilter> _filters = [
+    ColorFilter.mode(Colors.grey, BlendMode.color),
+    ColorFilter.matrix(<double>[
+      0.393, 0.769, 0.189, 0, 0,
+      0.349, 0.686, 0.168, 0, 0,
+      0.272, 0.534, 0.131, 0, 0,
+      0, 0, 0, 1, 0,
+    ]),
+    ColorFilter.matrix(<double>[
+      1.5, 0, 0, 0, -50,
+      0, 1.5, 0, 0, -50,
+      0, 0, 1.5, 0, -50,
+      0, 0, 0, 1, 0,
+    ]),
+    ColorFilter.mode(Colors.transparent, BlendMode.color),
+  ];
+
+  late Timer _timer;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _startTimer();
+  }
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
+
+  void _startTimer() {
+    const duration = Duration(milliseconds: 700);
+    _timer = Timer.periodic(duration, (Timer timer) {
+      if(_currentIndex == _filters.length-1) {
+        _timer.cancel();
+        return;
+      }
+      setState(() {
+        _currentIndex = (_currentIndex + 1) % _filters.length;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +97,7 @@ class About extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Center(child: SizedBox(height: 300, child: _buildImage(context))),
+        Center(child: _buildImage(context)),
         const SizedBox(
           height: 16,
         ),
@@ -62,7 +114,7 @@ class About extends StatelessWidget {
         const SizedBox(
           width: 26,
         ),
-        Expanded(flex: 1, child: _buildImage(context))
+        _buildImage(context)
       ],
     );
   }
@@ -125,13 +177,16 @@ class About extends StatelessWidget {
   }
 
   Widget _buildImage(context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(20.0),
+    return ClipOval(
       child: SizedBox(
-        height: min(MediaQuery.of(context).size.width * .6, 900),
-        child: Image.asset(
-          '${FilePath.imgAssetPath}me.jpeg',
-          alignment: Alignment.topCenter,
+        height: max(MediaQuery.of(context).size.width * .25, 240),
+        width: max(MediaQuery.of(context).size.width * .25, 240),
+        child: ColorFiltered(
+          colorFilter: _filters[_currentIndex],
+          child: Image.asset(
+            '${FilePath.imgAssetPath}me.jpeg',
+            alignment: Alignment.topCenter,
+          ),
         ),
       ),
     );
