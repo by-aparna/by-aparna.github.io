@@ -58,6 +58,23 @@ class _ExperienceCardState extends State<ExperienceCard>
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
+        if(!Responsive.isDesktop(context) && widget.url.isEmpty) {
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: Text(widget.title),
+              content: Text(widget.title + ' is in progress. Will be updated shortly!'),
+              actions: [
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('Continue :-)'))
+              ],
+            ),
+          );
+          return;
+        }
         if (widget.url.isNotEmpty) {
           await launch(widget.url, forceSafariVC: false);
         }
@@ -144,14 +161,14 @@ class _ExperienceCardState extends State<ExperienceCard>
                                 runSpacing: 8,
                                 children: widget.tagList,
                               ),
-                              widget.url.isEmpty
-                                  ? Column(
-                                      children: [
-                                        const SizedBox(
-                                            height: Dimens.defaultPadding),
-                                        const SizedBox(
-                                            height: Dimens.defaultPadding),
-                                        Text(
+                              widget.url.isEmpty &&
+                                  MediaQuery.sizeOf(context).width >= 1200
+                                  ? Align(
+                                      alignment: Alignment.bottomLeft,
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 2 * Dimens.defaultPadding),
+                                        child: Text(
                                           'Coming Soon...',
                                           style: MyTxtStyles.local_headingStyle(
                                                   context)
@@ -161,8 +178,8 @@ class _ExperienceCardState extends State<ExperienceCard>
                                                           context),
                                                   color: MyColors
                                                       .highlightTxtColor),
-                                        )
-                                      ],
+                                        ),
+                                      ),
                                     )
                                   : const SizedBox()
                             ],
