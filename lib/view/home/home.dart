@@ -276,11 +276,10 @@ class _HomePageState extends State<HomePage>
           onTap: () => _handleMenuClick(1),
           child: Text(
             ' Aparna Chatterjee.  ',
-            style: highlightedTextStyle.underlined(
-              distance: 4,
+            style: highlightedTextStyle.copyWith(
               color: _txtHovered
-                  ? MyColors.highlightColor
-                  : MyColors.secondaryTxtColor,
+                  ? MyColors.highlightTxtColor
+                  : MyColors.highlightColor,
             ),
           ),
         ),

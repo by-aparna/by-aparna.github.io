@@ -21,11 +21,13 @@ class _WorkState extends State<Work> {
 
   late SvgPicture proj1Img;
   late Image proj2Img;
+  late SvgPicture proj3Img;
 
   @override
   void initState() {
     proj1Img = SvgPicture.asset('${FilePath.imgAssetPath}dzap.svg', fit: BoxFit.contain);
     proj2Img = Image.asset('${FilePath.imgAssetPath}propel_bg.png', fit: BoxFit.contain,);
+    proj3Img = SvgPicture.asset('${FilePath.imgAssetPath}klout_bg.svg', fit: BoxFit.contain,);
     super.initState();
   }
 
@@ -167,7 +169,7 @@ class _WorkState extends State<Work> {
             ],
             descriptionBgColor: const Color(0xFF020309).withOpacity(0.1),
             assetBgColor: const Color(0xFFB7FFFF),
-            image: SvgPicture.asset('${FilePath.imgAssetPath}klout_bg.svg'),
+            image: proj3Img,
             logoImg: SvgPicture.asset('${FilePath.imgAssetPath}klout_logo.svg'),
             url: "",
           ),
