@@ -34,6 +34,7 @@ class _WorkState extends State<Work> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     precacheImage(proj2Img.image, context);
+    precacheImage(proj3Img.image, context);
   }
 
   Widget _tag({
