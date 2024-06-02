@@ -22,9 +22,6 @@ class _AboutState extends State<About> {
     const ColorFilter.matrix(<double>[
       0.393, 0.769, 0.189, 0, 0, 0.349, 0.686, 0.168, 0, 0, 0.272, 0.534, 0.131, 0, 0, 0, 0, 0, 1, 0,
     ]),
-    const ColorFilter.matrix(<double>[
-      1.5, 0, 0, 0, -50, 0, 1.5, 0, 0, -50, 0, 0, 1.5, 0, -50, 0, 0, 0, 1, 0,
-    ]),
     const ColorFilter.mode(Colors.transparent, BlendMode.color),
   ];
 

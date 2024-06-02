@@ -49,14 +49,23 @@ class _ExperienceCardState extends State<ExperienceCard>
       vsync: this,
       duration: const Duration(milliseconds: 300),
     );
-    if (widget.isHovered) {
+    if (_shouldAnimate()) {
       _controller.forward();
     }
+  }
+
+  bool _shouldAnimate() {
+    return widget.isHovered && _isHorizontal();
+  }
+
+  bool _isHorizontal() {
+    return !Responsive.isTablet(context);
   }
 
   @override
   void didUpdateWidget(covariant ExperienceCard oldWidget) {
     super.didUpdateWidget(oldWidget);
+    if (!_isHorizontal()) return;
     if (widget.isHovered != oldWidget.isHovered) {
       if (widget.isHovered) {
         _controller.forward();
@@ -127,14 +136,14 @@ class _ExperienceCardState extends State<ExperienceCard>
                     decoration: BoxDecoration(
                       border: Border(
                         left: BorderSide(
-                          color: widget.isHovered
+                          color: _shouldAnimate()
                               ? widget.assetBgColor
                               : widget.descriptionBgColor,
                           width: widget.isHovered ? 0.8 : 1,
                         ),
                       ),
                       borderRadius: BorderRadius.circular(12),
-                      gradient: widget.isHovered
+                      gradient: _shouldAnimate()
                           ? RadialGradient(
                               center: Alignment.centerLeft,
                               radius: 1.2,
@@ -230,7 +239,7 @@ class _ExperienceCardState extends State<ExperienceCard>
                             top: Dimens.responsiveMargin(context) + 30,
                           ),
                           transform: Matrix4.identity()
-                            ..scale(widget.isHovered ? 1.2 : 1.0),
+                            ..scale(_shouldAnimate() ? 1.2 : 1.0),
                           color: widget.assetBgColor,
                           child: Align(
                             alignment: Alignment.bottomCenter,

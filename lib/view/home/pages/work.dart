@@ -18,21 +18,29 @@ class Work extends StatefulWidget {
 class _WorkState extends State<Work> {
   int _isHovered = -1;
 
-  late SvgPicture proj1Img;
+  late Image proj1Img;
   late Image proj2Img;
   late Image proj3Img;
 
   @override
   void initState() {
-    proj1Img = SvgPicture.asset('${FilePath.imgAssetPath}dzap_bg.svg', fit: BoxFit.contain);
-    proj2Img = Image.asset('${FilePath.imgAssetPath}propel_bg.png', fit: BoxFit.contain,);
-    proj3Img = Image.asset('${FilePath.imgAssetPath}klout_bg.png', fit: BoxFit.contain,);
+    proj1Img =
+        Image.asset('${FilePath.imgAssetPath}dzap_bg.png', fit: BoxFit.contain);
+    proj2Img = Image.asset(
+      '${FilePath.imgAssetPath}propel_bg.png',
+      fit: BoxFit.contain,
+    );
+    proj3Img = Image.asset(
+      '${FilePath.imgAssetPath}klout_bg.png',
+      fit: BoxFit.contain,
+    );
     super.initState();
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    precacheImage(proj1Img.image, context);
     precacheImage(proj2Img.image, context);
     precacheImage(proj3Img.image, context);
   }
@@ -146,7 +154,7 @@ class _WorkState extends State<Work> {
             isHovered: _isHovered == 2,
             title: 'Professional Networking',
             description:
-                'Klout is a professional networking app that connects nearby professionals features real-time search capabilities, & customizable meeting availability.',
+                'Klout is a professional networking app that connects nearby professionals features real-time search capabilities etc',
             tagList: [
               _tag(
                 title: 'Product Design',
