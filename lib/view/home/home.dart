@@ -7,7 +7,6 @@ import 'package:aparna_chatterjee/res/strings.dart';
 import 'package:aparna_chatterjee/view/home/pages/illustration.dart';
 import 'package:aparna_chatterjee/view/home/pages/resume.dart';
 import 'package:aparna_chatterjee/view/home/pages/work.dart';
-import 'package:aparna_chatterjee/view/utils/textstyle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -106,7 +105,7 @@ class _HomePageState extends State<HomePage>
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: [
-          InkWell(
+          GestureDetector(
             onTap: () {
               _handleMenuClick(-1);
               final introContext = _introKey.currentContext;

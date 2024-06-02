@@ -28,7 +28,7 @@ class _HoverCardButtonState extends State<HoverCardButton> {
         });
       },
       style: ButtonStyle(
-        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
           const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(10)),
             side: BorderSide(
@@ -37,7 +37,7 @@ class _HoverCardButtonState extends State<HoverCardButton> {
             ),
           ),
         ),
-        backgroundColor: MaterialStateProperty.all<Color>(
+        backgroundColor: WidgetStateProperty.all<Color>(
           _isHovered ? MyColors.highlightColor : MyColors.secondaryBackground,
         ),
       ),
@@ -59,7 +59,7 @@ class _HoverCardButtonState extends State<HoverCardButton> {
 
   _launchURL() async {
     const url =
-        'https://drive.google.com/file/d/1xD-szCqvM1m29B3SK7V3hn9MxBTXQM2x/view';
+        'https://drive.google.com/file/d/1I0ecDaG1XxiStR-yQbmJZod8W1JaTfQu/view';
     if (await canLaunchUrlString(url)) {
       await launch(url);
     } else {

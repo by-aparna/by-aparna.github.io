@@ -40,7 +40,7 @@ class _WorkFooterState extends State<WorkFooter> {
           alignment: Alignment.center,
           child: Transform.scale(
             scale: _isHovered == index ? 1.1 : 1.0,
-            child: Container(
+            child: SizedBox(
               width: 50,
               height: 50,
               child: SvgPicture.asset(FilePath.imgAssetPath + filePath),

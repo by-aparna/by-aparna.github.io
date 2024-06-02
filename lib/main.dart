@@ -1,6 +1,4 @@
 import 'package:aparna_chatterjee/routes.dart';
-import 'package:aparna_chatterjee/view/home/home.dart';
-import 'package:aparna_chatterjee/view/splash/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 

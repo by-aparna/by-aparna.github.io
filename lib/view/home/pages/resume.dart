@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math';
 
 import 'package:aparna_chatterjee/res/color.dart';
 import 'package:aparna_chatterjee/res/font_styles.dart';
@@ -8,9 +7,6 @@ import 'package:flutter/material.dart';
 
 import '../../utils/responsive.dart';
 import '../components/hoverbutton.dart';
-
-import 'package:flutter/material.dart';
-import 'dart:async';
 
 class About extends StatefulWidget {
   const About({super.key});
@@ -43,7 +39,7 @@ class _AboutState extends State<About> {
   }
 
   Future<void> _preloadImage() async {
-    await precacheImage(AssetImage('${FilePath.imgAssetPath}me.jpeg'), context);
+    await precacheImage(const AssetImage('${FilePath.imgAssetPath}me.jpeg'), context);
   }
 
   @override
@@ -86,7 +82,7 @@ class _AboutState extends State<About> {
                 if (snapshot.connectionState == ConnectionState.done) {
                   return isLargeMobile ? _mobileAboutMeLayout(context) : _desktopAboutMeLayout(context);
                 } else {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 }
               },
             ),

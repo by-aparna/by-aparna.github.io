@@ -1,13 +1,3 @@
-import 'package:aparna_chatterjee/res/path.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-
-import '../../res/color.dart';
-import '../../res/dimens.dart';
-import '../../res/font_styles.dart';
-import '../../res/strings.dart';
-import '../utils/responsive.dart';
-
 import 'package:flutter/material.dart';
 
 class AnimatedEmojiPage extends StatefulWidget {
@@ -54,7 +44,7 @@ class _AnimatedEmojiPageState extends State<AnimatedEmojiPage>
   Widget _animatedEmoji() {
     return ScaleTransition(
       scale: animationController,
-      child: Icon(
+      child: const Icon(
         Icons.emoji_emotions,
         size: 60,
         color: Colors.yellow,
@@ -85,7 +75,7 @@ class _AnimatedEmojiPageState extends State<AnimatedEmojiPage>
             ],
           ),
           const SizedBox(height: 30),
-          Text(
+          const Text(
             'Your profession here', // replace with Strings.intro_prof
             style: TextStyle(
               fontSize: 24,
@@ -94,7 +84,7 @@ class _AnimatedEmojiPageState extends State<AnimatedEmojiPage>
             ),
           ),
           const SizedBox(height: 40),
-          Text(
+          const Text(
             'Your location here', // replace with Strings.intro_loc
             style: TextStyle(
               fontSize: 16,
@@ -111,7 +101,7 @@ class _AnimatedEmojiPageState extends State<AnimatedEmojiPage>
       crossAxisAlignment: WrapCrossAlignment.start,
       alignment: WrapAlignment.start,
       children: [
-        Text(
+        const Text(
           'Hello, I\'m  ',
           style: TextStyle(
             fontSize: 24,
@@ -123,7 +113,7 @@ class _AnimatedEmojiPageState extends State<AnimatedEmojiPage>
           onTap: () {
             // Handle click event
           },
-          child: Text(
+          child: const Text(
             'Aparna Chatterjee.',
             style: TextStyle(
               fontSize: 24,

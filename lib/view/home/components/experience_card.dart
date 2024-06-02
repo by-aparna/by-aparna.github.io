@@ -88,7 +88,7 @@ class _ExperienceCardState extends State<ExperienceCard>
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text('Continue :-)'),
+                  child: const Text('Continue :-)'),
                 ),
               ],
             ),
@@ -105,7 +105,7 @@ class _ExperienceCardState extends State<ExperienceCard>
             color: widget.assetBgColor.withOpacity(0.8),
             width: 0.8,
           ),
-          borderRadius: BorderRadius.all(Radius.circular(14)),
+          borderRadius: const BorderRadius.all(Radius.circular(14)),
         ),
         height: Responsive.isLargeMobile(context) ? 600 : 500,
         width: MediaQuery.of(context).size.width * 0.76,

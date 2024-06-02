@@ -2,7 +2,6 @@ import 'package:aparna_chatterjee/res/color.dart';
 import 'package:aparna_chatterjee/res/font_styles.dart';
 import 'package:aparna_chatterjee/res/path.dart';
 import 'package:aparna_chatterjee/res/strings.dart';
-import 'package:aparna_chatterjee/view/home/components/work_footer.dart';
 import 'package:aparna_chatterjee/view/utils/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
