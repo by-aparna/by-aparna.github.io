@@ -21,13 +21,13 @@ class _WorkState extends State<Work> {
 
   late SvgPicture proj1Img;
   late Image proj2Img;
-  late SvgPicture proj3Img;
+  late Image proj3Img;
 
   @override
   void initState() {
-    proj1Img = SvgPicture.asset('${FilePath.imgAssetPath}dzap.svg', fit: BoxFit.contain);
+    proj1Img = SvgPicture.asset('${FilePath.imgAssetPath}dzap_bg.svg', fit: BoxFit.contain);
     proj2Img = Image.asset('${FilePath.imgAssetPath}propel_bg.png', fit: BoxFit.contain,);
-    proj3Img = SvgPicture.asset('${FilePath.imgAssetPath}klout_bg.svg', fit: BoxFit.contain,);
+    proj3Img = Image.asset('${FilePath.imgAssetPath}klout_bg.png', fit: BoxFit.contain,);
     super.initState();
   }
 

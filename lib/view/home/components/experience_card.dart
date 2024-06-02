@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 import '../../../res/color.dart';
 import '../../../res/dimens.dart';
 import '../../../res/font_styles.dart';
@@ -19,17 +21,18 @@ class ExperienceCard extends StatefulWidget {
   final bool isHovered;
   final String url;
 
-  const ExperienceCard(
-      {super.key,
-      required this.title,
-      required this.description,
-      required this.tagList,
-      required this.descriptionBgColor,
-      required this.assetBgColor,
-      required this.image,
-      required this.logoImg,
-      required this.isHovered,
-      required this.url});
+  const ExperienceCard({
+    super.key,
+    required this.title,
+    required this.description,
+    required this.tagList,
+    required this.descriptionBgColor,
+    required this.assetBgColor,
+    required this.image,
+    required this.logoImg,
+    required this.isHovered,
+    required this.url,
+  });
 
   @override
   State<ExperienceCard> createState() => _ExperienceCardState();
@@ -46,6 +49,21 @@ class _ExperienceCardState extends State<ExperienceCard>
       vsync: this,
       duration: const Duration(milliseconds: 300),
     );
+    if (widget.isHovered) {
+      _controller.forward();
+    }
+  }
+
+  @override
+  void didUpdateWidget(covariant ExperienceCard oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.isHovered != oldWidget.isHovered) {
+      if (widget.isHovered) {
+        _controller.forward();
+      } else {
+        _controller.reverse();
+      }
+    }
   }
 
   @override
@@ -58,18 +76,20 @@ class _ExperienceCardState extends State<ExperienceCard>
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
-        if(!Responsive.isDesktop(context) && widget.url.isEmpty) {
+        if (!Responsive.isDesktop(context) && widget.url.isEmpty) {
           showDialog(
             context: context,
             builder: (context) => AlertDialog(
               title: Text(widget.title),
-              content: Text(widget.title + ' is in progress. Will be updated shortly!'),
+              content: Text(
+                  '${widget.title} is in progress. Will be updated shortly!'),
               actions: [
                 ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text('Continue :-)'))
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text('Continue :-)'),
+                ),
               ],
             ),
           );
@@ -82,8 +102,10 @@ class _ExperienceCardState extends State<ExperienceCard>
       child: Container(
         decoration: BoxDecoration(
           border: Border.all(
-              color: widget.assetBgColor.withOpacity(0.8), width: 0.8),
-          borderRadius: const BorderRadius.all(Radius.circular(14)),
+            color: widget.assetBgColor.withOpacity(0.8),
+            width: 0.8,
+          ),
+          borderRadius: BorderRadius.all(Radius.circular(14)),
         ),
         height: Responsive.isLargeMobile(context) ? 600 : 500,
         width: MediaQuery.of(context).size.width * 0.76,
@@ -97,93 +119,84 @@ class _ExperienceCardState extends State<ExperienceCard>
               columnOrder: 2,
               child: Expanded(
                 flex: 1,
-                child: MouseRegion(
-                  onEnter: (_) => _controller.forward(),
-                  onExit: (_) => _controller.reverse(),
-                  child: AnimatedBuilder(
-                    animation: _controller,
-                    builder: (context, child) => AnimatedContainer(
-                      duration: const Duration(milliseconds: 400),
-                      curve: Curves.easeInOutCirc,
-                      decoration: BoxDecoration(
-                        border: Border(
-                          left: BorderSide(
-                            color: widget.isHovered
-                                ? widget.assetBgColor
-                                : widget.descriptionBgColor,
-                            width: widget.isHovered ? 0.8 : 1,
-                          ),
+                child: AnimatedBuilder(
+                  animation: _controller,
+                  builder: (context, child) => AnimatedContainer(
+                    duration: const Duration(milliseconds: 400),
+                    curve: Curves.easeInOutCirc,
+                    decoration: BoxDecoration(
+                      border: Border(
+                        left: BorderSide(
+                          color: widget.isHovered
+                              ? widget.assetBgColor
+                              : widget.descriptionBgColor,
+                          width: widget.isHovered ? 0.8 : 1,
                         ),
-                        borderRadius: BorderRadius.circular(12),
-                        gradient: widget.isHovered
-                            ? RadialGradient(
-                                center: Alignment.centerLeft,
-                                radius: 1.2,
-                                colors: [
-                                  widget.assetBgColor.withOpacity(0.15),
-                                  widget.descriptionBgColor.withOpacity(0),
-                                ],
-                              )
-                            : LinearGradient(
-                                begin: Alignment.bottomRight,
-                                end: Alignment.topLeft,
-                                colors: [
-                                  widget.assetBgColor.withOpacity(0.15),
-                                  widget.descriptionBgColor.withOpacity(0),
-                                ],
-                              ),
                       ),
-                      child: Center(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 24),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                widget.title,
-                                style: MyTxtStyles.local_headingStyle(context)
-                                    .copyWith(
-                                        color: MyColors.highlightTxtColor),
+                      borderRadius: BorderRadius.circular(12),
+                      gradient: widget.isHovered
+                          ? RadialGradient(
+                              center: Alignment.centerLeft,
+                              radius: 1.2,
+                              colors: [
+                                widget.assetBgColor.withOpacity(0.15),
+                                widget.descriptionBgColor.withOpacity(0),
+                              ],
+                            )
+                          : LinearGradient(
+                              begin: Alignment.bottomRight,
+                              end: Alignment.topLeft,
+                              colors: [
+                                widget.assetBgColor.withOpacity(0.15),
+                                widget.descriptionBgColor.withOpacity(0),
+                              ],
+                            ),
+                    ),
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              widget.title,
+                              style: MyTxtStyles.local_headingStyle(context)
+                                  .copyWith(color: MyColors.highlightTxtColor),
+                            ),
+                            const SizedBox(height: Dimens.defaultPadding),
+                            Text(
+                              widget.description,
+                              style: MyTxtStyles.local_primaryTextStyle(context)
+                                  .copyWith(color: MyColors.secondaryTxtColor),
+                            ),
+                            const SizedBox(height: Dimens.defaultPadding),
+                            Wrap(
+                              clipBehavior: Clip.hardEdge,
+                              spacing: 8,
+                              runSpacing: 8,
+                              children: widget.tagList,
+                            ),
+                            if (widget.url.isEmpty &&
+                                MediaQuery.of(context).size.width >= 1200)
+                              Align(
+                                alignment: Alignment.bottomLeft,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 2 * Dimens.defaultPadding),
+                                  child: Text(
+                                    'Coming Soon...',
+                                    style:
+                                        MyTxtStyles.local_headingStyle(context)
+                                            .copyWith(
+                                      fontSize: MyTxtStyles.local_ctaFontSize(
+                                          context),
+                                      color: MyColors.highlightTxtColor,
+                                    ),
+                                  ),
+                                ),
                               ),
-                              const SizedBox(height: Dimens.defaultPadding),
-                              Text(
-                                widget.description,
-                                style:
-                                    MyTxtStyles.local_primaryTextStyle(context)
-                                        .copyWith(
-                                            color: MyColors.secondaryTxtColor),
-                              ),
-                              const SizedBox(height: Dimens.defaultPadding),
-                              Wrap(
-                                clipBehavior: Clip.hardEdge,
-                                spacing: 8,
-                                runSpacing: 8,
-                                children: widget.tagList,
-                              ),
-                              widget.url.isEmpty &&
-                                  MediaQuery.sizeOf(context).width >= 1200
-                                  ? Align(
-                                      alignment: Alignment.bottomLeft,
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(
-                                            top: 2 * Dimens.defaultPadding),
-                                        child: Text(
-                                          'Coming Soon...',
-                                          style: MyTxtStyles.local_headingStyle(
-                                                  context)
-                                              .copyWith(
-                                                  fontSize: MyTxtStyles
-                                                      .local_ctaFontSize(
-                                                          context),
-                                                  color: MyColors
-                                                      .highlightTxtColor),
-                                        ),
-                                      ),
-                                    )
-                                  : const SizedBox()
-                            ],
-                          ),
+                          ],
                         ),
                       ),
                     ),

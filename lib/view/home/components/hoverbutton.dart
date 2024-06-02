@@ -28,7 +28,7 @@ class _HoverCardButtonState extends State<HoverCardButton> {
         });
       },
       style: ButtonStyle(
-        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
           const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(10)),
             side: BorderSide(
@@ -37,7 +37,7 @@ class _HoverCardButtonState extends State<HoverCardButton> {
             ),
           ),
         ),
-        backgroundColor: WidgetStateProperty.all<Color>(
+        backgroundColor: MaterialStateProperty.all<Color>(
           _isHovered ? MyColors.highlightColor : MyColors.secondaryBackground,
         ),
       ),
