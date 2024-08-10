@@ -46581,7 +46581,7 @@ this.Zc()},
 U(a){var s,r,q,p,o,n,m,l,k,j,i,h,g=this,f=null,e=g.a.r.a
 e=A.aoZ(A.a3(204,e>>>16&255,e>>>8&255,e&255),0.8)
 s=t.w
-r=A.ao(a,B.v,s).w.a.a<=700?600:500
+r=A.ao(a,B.v,s).w.a.a<=700?700:500
 q=A.ao(a,f,s).w
 p=A.ao(a,B.v,s).w.a.a<=900?B.NK:B.xd
 o=g.d
