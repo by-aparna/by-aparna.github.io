@@ -85,7 +85,7 @@ class _ExperienceCardState extends State<ExperienceCard>
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
-        if (!Responsive.isDesktop(context) && widget.url.isEmpty) {
+        if (widget.url.isEmpty) {
           showDialog(
             context: context,
             builder: (context) => AlertDialog(

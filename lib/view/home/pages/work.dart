@@ -91,6 +91,15 @@ class _WorkState extends State<Work> {
                 'Batch swapping enables users to exchange multiple tokens in a single transaction.',
             tagList: [
               _tag(
+                title: 'Responsive Design',
+                titleColor: const Color(0xFF99FFA9),
+                borderColor: const Color(0xFF48C229),
+                gradient: LinearGradient(colors: [
+                  const Color(0xFF207A00).withOpacity(0.2),
+                  const Color(0xFF56F7EE).withOpacity(0.2)
+                ]),
+              ),
+              _tag(
                 title: 'Product Design',
                 titleColor: const Color(0xFF99C2FF),
                 borderColor: const Color(0xFF2966C2),
@@ -129,12 +138,21 @@ class _WorkState extends State<Work> {
                 'A tool for investors to track their token allocations, vesting schedule & claimable tokens in all the funding rounds.',
             tagList: [
               _tag(
-                title: 'Product Re-Design',
+                title: 'Responsive Design',
                 titleColor: const Color(0xFF99FFA9),
                 borderColor: const Color(0xFF48C229),
                 gradient: LinearGradient(colors: [
                   const Color(0xFF207A00).withOpacity(0.2),
                   const Color(0xFF56F7EE).withOpacity(0.2)
+                ]),
+              ),
+              _tag(
+                title: 'Product Re-Design',
+                titleColor: const Color(0xFF99C2FF),
+                borderColor: const Color(0xFF2966C2),
+                gradient: LinearGradient(colors: [
+                  const Color(0xFF00407A).withOpacity(0.2),
+                  const Color(0xFF56AAF7).withOpacity(0.2)
                 ]),
               ),
             ],
@@ -166,12 +184,12 @@ class _WorkState extends State<Work> {
                 ]),
               ),
               _tag(
-                title: 'Brand Design',
-                titleColor: const Color(0xFFFFA279),
-                borderColor: const Color(0xFFC25729),
+                title: 'Mobile Design',
+                titleColor: const Color(0xFFFFF279),
+                borderColor: const Color(0xFFC2A829),
                 gradient: LinearGradient(colors: [
-                  const Color(0xFF7A3300).withOpacity(0.2),
-                  const Color(0xFFF79056).withOpacity(0.2)
+                  const Color(0xFF7A7100).withOpacity(0.2),
+                  const Color(0xFFF7E356).withOpacity(0.2)
                 ]),
               ),
             ],
