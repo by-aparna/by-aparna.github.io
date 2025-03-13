@@ -109,6 +109,15 @@ class _WorkFooterState extends State<WorkFooter> {
                 );
               }),
             ),
+            MouseRegion(
+              onEnter: (_) => setState(() => _isHovered = 4),
+              onExit: (_) => setState(() => _isHovered = -1),
+              child: _makeSocialButton(4, "insta.svg", Colors.white, () {
+                launchURL(
+                  url: "https://www.instagram.com/aparnadesigner_studio/",
+                );
+              }),
+            ),
           ],
         ),
         const SizedBox(

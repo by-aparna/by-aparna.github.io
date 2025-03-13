@@ -116,7 +116,7 @@ class _ExperienceCardState extends State<ExperienceCard>
           ),
           borderRadius: const BorderRadius.all(Radius.circular(14)),
         ),
-        height: Responsive.isLargeMobile(context) ? 600 : 500,
+        height: Responsive.isLargeMobile(context) ? 700 : 500,
         width: MediaQuery.of(context).size.width * 0.76,
         child: ResponsiveRowColumn(
           layout: Responsive.isTablet(context)
