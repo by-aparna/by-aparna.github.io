@@ -3,7 +3,7 @@ class Strings {
   static const String menu_resume = "About";
   static const String menu_illus = "Illustrations";
 
-  static const String lbl_exp = "My Recent Work";
+  static const String lbl_exp = "My Work";
   static const String lbl_wed_illus = "Wedding Illustrations";
   static const String lbl_prj_illus = "Project Illustrations";
 
