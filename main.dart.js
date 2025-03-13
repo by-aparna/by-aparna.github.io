@@ -47053,7 +47053,7 @@ p.toString
 return A.fQ(s,A.vy(A.ek("#"+c,A.alZ(p).dL(d)),s,s),B.w,s,B.zX,new A.dR(s,s,r,q,s,b,B.aF),s,s,s,s,B.G4,s,s,s)},
 a95(){var s,r,q,p,o,n,m,l,k=this,j=null,i="Responsive Design",h="Product Design",g=k.c
 g.toString
-g=A.ek("My Recent Work",A.ks(g).dL(B.bt))
+g=A.ek("My Work",A.ks(g).dL(B.bt))
 s=k.d
 r=t.t_
 q=t.D
